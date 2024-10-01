@@ -35,6 +35,7 @@ main {
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
+  color: #ffffff;
 }
 
 /* Grouping content
@@ -920,7 +921,7 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: #2d3e50 !important;
+  background-color: #736F4E !important;
 }
 
 .bg-info {
@@ -1012,7 +1013,7 @@ a:hover {
 }
 
 .btn.btn-primary {
-  background-color: #2d3e50;
+  background-color: #736F4E;
   color: #d9e9e8;
 }
 
@@ -1030,7 +1031,8 @@ a:hover {
 }
 
 .btn.btn-info {
-  background-color: #1bbc9b;
+  background-color: #4C061D;
+  /* background-color: #1bbc9b; */
   color: #ffffff;
 }
 
