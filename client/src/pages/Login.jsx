@@ -48,6 +48,7 @@ const Login = (props) => {
           <div className="card-body">
             {data ? (
               <p>
+                <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
                 Success! You may now head{' '}
                 <Link to="/">back to the homepage.</Link>
               </p>
