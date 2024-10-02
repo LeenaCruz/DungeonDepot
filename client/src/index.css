@@ -450,6 +450,7 @@ a:hover {
   display: flex;
   justify-content: center;
   color: #b06418;
+  
 }
 
 /* .login-card-header-style {
@@ -461,6 +462,7 @@ a:hover {
   justify-content: center;
   color: #D17A22;
   font-size: 30px;
+  font-weight: bold;
 
 }
 
@@ -1131,6 +1133,10 @@ a:hover {
 .icon-sizing {
   height: 300px;
   width: 300px;
+}
+
+.icon-sizing:hover {
+  /* transform: rotate(180deg); */
 }
 
 .pos-main-icon {
