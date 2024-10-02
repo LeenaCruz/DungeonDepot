@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="bg-primary text-light mb-4 py-3 flex-row align-center">
       <div className="container flex-row justify-space-between-lg justify-center align-center">
-        <div>
+        <div className='header-spacing'>
           <Link className="text-light" to="/">
             <h1 className="m-0">Dungeon Depot</h1>
           </Link>

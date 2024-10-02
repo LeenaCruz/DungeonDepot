@@ -425,6 +425,10 @@ button {
   margin: 0;
 }
 
+footer {
+  background-color: #736F4E;
+}
+
 a {
   color: #1b89bc;
   text-decoration: none;
@@ -433,6 +437,25 @@ a {
 a:hover {
   color: #065b83;
   text-decoration: underline;
+}
+
+.header-spacing {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.welcome-message {
+  display: flex;
+  justify-content: center;
+}
+
+.login-prompt {
+  display: flex;
+  justify-content: center;
+  color: #D17A22;
+  font-size: 30px;
+
 }
 
 /* HEIGHT / WIDTH UTILS */
