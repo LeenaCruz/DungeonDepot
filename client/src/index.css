@@ -1127,6 +1127,7 @@ a:hover {
   color: #d9e9e8;
 }
 
+
 .login-card-header-style {
   padding: 0.375rem;
   color: #d9e9e8;
@@ -1134,6 +1135,14 @@ a:hover {
   display: flex;
   justify-content: center;
   /* border: 2px, solid, #D17A22; */
+}
+
+.sign-up-card-header-style {
+  padding: 0.375rem;
+  color: #d9e9e8;
+  background-color: #4C061D;
+  display: flex;
+  justify-content: center;
 }
 
 .card .card-body {
