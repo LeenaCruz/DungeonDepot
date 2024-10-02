@@ -15,17 +15,7 @@ const Footer = () => {
           </button>
         )}
         <h4>
-          Made
-          {/* Made with{' '} */}
-          <span
-            className="emoji"
-            role="img"
-            aria-label="heart"
-            aria-hidden="false"
-          >
-            {/* ❤️ */}
-          </span>{' '}
-          by Group 1.
+          Made by Group 1.
         </h4>
       </div>
     </footer>
