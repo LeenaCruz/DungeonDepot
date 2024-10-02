@@ -425,6 +425,11 @@ button {
   margin: 0;
 }
 
+footer {
+  background-color: #736F4E;
+  color: aliceblue;
+}
+
 a {
   color: #1b89bc;
   text-decoration: none;
@@ -433,6 +438,29 @@ a {
 a:hover {
   color: #065b83;
   text-decoration: underline;
+}
+
+.header-spacing {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.welcome-message {
+  display: flex;
+  justify-content: center;
+}
+
+/* .login-card-header-style {
+  background-color: #B4C292;
+} */
+
+.login-prompt {
+  display: flex;
+  justify-content: center;
+  color: #D17A22;
+  font-size: 30px;
+
 }
 
 /* HEIGHT / WIDTH UTILS */
@@ -1088,14 +1116,33 @@ a:hover {
 }
 
 .card {
-  border: 1px solid #1a1a1a;
+  border: 2px dashed #D17A22;
   margin-bottom: 1rem;
+  padding: 10px;
 }
 
 .card .card-header {
   padding: 0.375rem;
   background-color: #2d3e50;
   color: #d9e9e8;
+}
+
+
+.login-card-header-style {
+  padding: 0.375rem;
+  color: #d9e9e8;
+  background-color: #4C061D;
+  display: flex;
+  justify-content: center;
+  /* border: 2px, solid, #D17A22; */
+}
+
+.sign-up-card-header-style {
+  padding: 0.375rem;
+  color: #d9e9e8;
+  background-color: #4C061D;
+  display: flex;
+  justify-content: center;
 }
 
 .card .card-body {

@@ -7,7 +7,7 @@ import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
-const ThoughtForm = () => {
+const LandingPage = () => {
   const [thoughtText, setThoughtText] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
@@ -50,7 +50,7 @@ const ThoughtForm = () => {
 
   return (
     <div>
-      <h3>Add items to your cart!</h3>
+      <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
 
       {Auth.loggedIn() ? (
         <>
@@ -91,13 +91,14 @@ const ThoughtForm = () => {
           </form>
         </>
       ) : (
-        <p>
+        <p className='login-prompt'>
           You need to be logged in to see the GM's store. Please{' '}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+          <Link to="/login" style={{marginRight: 5, marginLeft: 5}}> login </Link> or <Link to="/signup" style={{marginRight: 5, marginLeft: 5}}>signup.</Link>
         </p>
+        
       )}
     </div>
   );
 };
 
-export default ThoughtForm;
+export default LandingPage;
