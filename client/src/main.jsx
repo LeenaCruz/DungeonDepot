@@ -6,8 +6,9 @@ import App from './App.jsx'
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import SingleThought from './pages/SingleThought';
-import Profile from './pages/Profile';
+// import SingleThought from './pages/SingleThought';
+import Dashboard from './pages/Dashboard';
+import Item from './pages/Item'
 import Error from './pages/Error';
 
 const router = createBrowserRouter([
@@ -27,14 +28,19 @@ const router = createBrowserRouter([
         element: <Signup />
       }, {
         path: '/me',
-        element: <Profile />
+        element: <Dashboard />
       }, {
         path: '/profiles/:username',
-        element: <Profile />
-      }, {
-        path: '/thoughts/:thoughtId',
-        element: <SingleThought />
-      }
+        element: <Dashboard />
+      }, 
+      {paths: '/item',
+        element: <Item />
+      },
+      //Erase later
+      // {
+      //   path: '/thoughts/:thoughtId',
+      //   element: <SingleThought />
+      // }
     ]
   }
 ])
