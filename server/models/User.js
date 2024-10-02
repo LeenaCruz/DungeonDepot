@@ -19,10 +19,38 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  thoughts: [
+  role: {
+    type: String,
+    enum: ['gm', 'player'], // Only GM or Player roles allowed
+    required: true,
+  },
+  wallet: {
+    type: Number,
+    default: 100, // Only applies for players
+    min: 0, // Ensure the wallet doesn't go below
+  },
+  inventory: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: 'Item', // Items that the player owns
+    },
+  ],
+  stores: [
+    {
+      types: Schema.Types.ObjectId,
+      ref: 'Store', // Stores owned by GMs
+    },
+  ],
+  cart: [
+    {
+      item: {
+        type: Schema.Types.ObjectId,
+        ref: 'Item', // Item in the player's cart
+      },
+      quantity: {
+        type: Number,
+        default: 1, // Quantity of the item in the cart
+      },
     },
   ],
 });
