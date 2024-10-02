@@ -449,6 +449,7 @@ a:hover {
 .welcome-message {
   display: flex;
   justify-content: center;
+  color: #b06418;
 }
 
 /* .login-card-header-style {
@@ -1127,6 +1128,15 @@ a:hover {
   color: #d9e9e8;
 }
 
+.icon-sizing {
+  height: 300px;
+  width: 300px;
+}
+
+.pos-main-icon {
+  display: flex;
+  justify-content: center;
+}
 
 .login-card-header-style {
   padding: 0.375rem;
@@ -1134,7 +1144,6 @@ a:hover {
   background-color: #4C061D;
   display: flex;
   justify-content: center;
-  /* border: 2px, solid, #D17A22; */
 }
 
 .sign-up-card-header-style {

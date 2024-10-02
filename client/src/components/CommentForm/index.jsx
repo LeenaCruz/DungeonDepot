@@ -2,30 +2,30 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_COMMENT } from '../../utils/mutations';
+import { ADD_ITEM } from '../../utils/mutations';
 
 import Auth from '../../utils/auth';
 
-const CommentForm = ({ thoughtId }) => {
-  const [commentText, setCommentText] = useState('');
+const ItemForm = ({ thoughtId }) => {
+  const [ItemText, setItemText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addComment, { error }] = useMutation(ADD_COMMENT);
+  const [addItem, { error }] = useMutation(ADD_Item);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await addComment({
+      const { data } = await addItem({
         variables: {
           thoughtId,
-          commentText,
+          itemText,
           // Run the getProfile() method to get access to the unencrypted token value in order to retrieve the user's username 
-          commentAuthor: Auth.getProfile().authenticatedPerson.username
+          itemAuthor: Auth.getProfile().authenticatedPerson.username
         },
       });
 
-      setCommentText('');
+      setItemText('');
     } catch (err) {
       console.error(err);
     }
@@ -34,8 +34,8 @@ const CommentForm = ({ thoughtId }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'commentText' && value.length <= 280) {
-      setCommentText(value);
+    if (name === 'ItemText' && value.length <= 280) {
+      setItemText(value);
       setCharacterCount(value.length);
     }
   };
@@ -60,9 +60,9 @@ const CommentForm = ({ thoughtId }) => {
           >
             <div className="col-12 col-lg-9">
               <textarea
-                name="commentText"
-                placeholder="Add your comment..."
-                value={commentText}
+                name="ItemText"
+                placeholder="Add your Item..."
+                value={ItemText}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
@@ -71,7 +71,7 @@ const CommentForm = ({ thoughtId }) => {
 
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Comment
+                Add Item
               </button>
             </div>
           </form>
@@ -86,4 +86,4 @@ const CommentForm = ({ thoughtId }) => {
   );
 };
 
-export default CommentForm;
+export default ItemForm;

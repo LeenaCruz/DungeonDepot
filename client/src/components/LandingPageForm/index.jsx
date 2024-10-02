@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+import kingDice from '../../assets/kingDice.jpeg'
 
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
@@ -50,7 +51,6 @@ const LandingPage = () => {
 
   return (
     <div>
-      <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
 
       {Auth.loggedIn() ? (
         <>
@@ -91,11 +91,15 @@ const LandingPage = () => {
           </form>
         </>
       ) : (
+        <div>
         <p className='login-prompt'>
           You need to be logged in to see the GM's store. Please{' '}
           <Link to="/login" style={{marginRight: 5, marginLeft: 5}}> login </Link> or <Link to="/signup" style={{marginRight: 5, marginLeft: 5}}>signup.</Link>
         </p>
-        
+        <div className='pos-main-icon'>
+         <img src={kingDice} className='icon-sizing' />
+         </div>
+         </div>
       )}
     </div>
   );
