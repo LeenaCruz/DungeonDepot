@@ -1133,6 +1133,9 @@ a:hover {
 .icon-sizing {
   height: 300px;
   width: 300px;
+  /* position: 'absolute';
+  z-index: 10;
+  transition:cubic-bezier(1, 0, 0, 1) */
 }
 
 .icon-sizing:hover {
