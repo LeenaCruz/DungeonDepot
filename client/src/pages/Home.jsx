@@ -1,9 +1,9 @@
-import { useQuery } from '@apollo/client';
+// `import { useQuery } from '@apollo/client';
 
-import ThoughtList from '../components/ThoughtList';
-// import LandingPage from '../components/LandingPageForm';
+// import ThoughtList from '../components/ThoughtList';
+// // import LandingPage from '../components/LandingPageForm';
 
-import { QUERY_THOUGHTS } from '../utils/queries';
+// import { QUERY_THOUGHTS } from '../utils/queries'`;
 import LandingPage from '../components/LandingPageForm';
 
 const Home = () => {
