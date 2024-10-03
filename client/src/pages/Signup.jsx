@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import LandingPage from '../components/LandingPageForm';
 
 import Auth from '../utils/auth';
 
@@ -48,7 +49,8 @@ const Signup = () => {
               <p>
                 <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
                 Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                {/* <Link to="/">back to the homepage.</Link> */}
+                <Link to={LandingPage}>Welcome!</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
