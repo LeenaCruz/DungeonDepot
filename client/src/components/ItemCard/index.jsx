@@ -1,59 +1,107 @@
-import { Link } from "react-router-dom";
-import { pluralize } from "../../utils/helpers"
-import { useStoreContext } from "../../utils/GlobalState";
-import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
-import { idbPromise } from "../../utils/helpers";
+import React, { useEffect, useState } from "react";
 
-function ProductItem(item) {
-  const [state, dispatch] = useStoreContext();
+function ItemCard() {
 
-  const {
-    image,
-    name,
-    _id,
-    price,
-    quantity
-  } = item;
+  const [data, setData] = useState([]);
 
-  const { cart } = state
+  const fetchData = () => {
 
-  const addToCart = () => {
-    const itemInCart = cart.find((cartItem) => cartItem._id === _id)
-    if (itemInCart) {
-      dispatch({
-        type: UPDATE_CART_QUANTITY,
-        _id: _id,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
-      });
-      idbPromise('cart', 'put', {
-        ...itemInCart,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
-      });
-    } else {
-      dispatch({
-        type: ADD_TO_CART,
-        product: { ...item, purchaseQuantity: 1 }
-      });
-      idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
-    }
+    return fetch("https://www.dnd5eapi.co/api/equipment")
+
+      .then((res) => res.json())
+
+      .then((d) => setData(d));
+
+  };
+
+  useEffect(() => {
+
+    fetchData();
+
+  }, []);
+
+  const [query, setQuery] = useState("");
+
+  const search_parameters = Object.keys(Object.assign({}, ...data));
+
+  function search(data) {
+
+    return data.filter((data) =>
+
+      search_parameters.some((parameter) =>
+
+        data[parameter].toString().toLowerCase().includes(query)
+
+      )
+
+    );
+
   }
 
   return (
-    <div className="card px-1 py-1">
-      <Link to={`/products/${_id}`}>
-        <img
-          alt={name}
-          src={`/images/${image}`}
+
+    <div className="container">
+
+      <center>
+
+        <h1>Search component in ReactJS</h1>
+
+      </center>
+
+      <div className="input-box">
+
+        <input
+
+          type="search"
+
+          name="search-form"
+
+          id="search-form"
+
+          className="search-input"
+
+          onChange={(e) => setQuery(e.target.value)}
+
+          placeholder="Search user"
+
         />
-        <p>{name}</p>
-      </Link>
-      <div>
-        <div>{quantity} {pluralize("item", quantity)} in stock</div>
-        <span>${price}</span>
+
       </div>
-      <button onClick={addToCart}>Add to cart</button>
+
+      <center>
+
+        {search(data).map((dataObj) => {
+
+          return (
+
+            <div className="box">
+
+              <div class="card">
+
+                <div class="category">@{dataObj.category} </div>
+
+                <div class="heading">
+
+                  {dataObj.name}
+
+                  {/* <div class="author">{dataObj.desc}</div> */}
+
+                </div>
+
+              </div>
+
+            </div>
+
+          );
+
+        })}
+
+      </center>
+
     </div>
+
   );
+
 }
 
-export default ProductItem;
+export default ItemCard;
