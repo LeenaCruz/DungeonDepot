@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
 const userSchema = new Schema({
   username: {
@@ -37,7 +38,7 @@ const userSchema = new Schema({
   ],
   stores: [
     {
-      types: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Store', // Stores owned by GMs
     },
   ],
