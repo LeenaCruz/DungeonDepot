@@ -35,7 +35,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
+
 function App() {
+
   return (
     <ApolloProvider client={client}>
       <div className="flex-column justify-flex-start min-100-vh">
@@ -45,6 +48,8 @@ function App() {
         </div>
         <Footer />
       </div>
+
+
     </ApolloProvider>
   );
 }

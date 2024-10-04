@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
+import Inventory  from '../components/InventoryList'
 
 import Auth from '../utils/auth';
 
@@ -44,14 +45,30 @@ const Login = (props) => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="login-card-header-style">Login</h4>
+          <h4 className="login-card-header-style">Welcome back</h4>
           <div className="card-body">
             {data ? (
               <p>
                 <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
-                Success! You may now head{' '}
+                Check the invetory below! Don't forget to checkout! {' '}
                 <Link to="/me">to your Dashboard.</Link>
+
+
+                <div className="col-12 col-lg-10">
+                  <div className="card inventory-list">
+                    <h4 className="login-card-header-style">Inventory</h4>
+                      <div className="card-body all-inv">
+
+                        <Inventory />
+                        
+                        Add Inventory scrollable list here 
+                    </div>
+                  </div>
+                </div>
               </p>
+
+
+
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
