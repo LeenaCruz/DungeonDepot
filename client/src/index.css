@@ -1590,6 +1590,8 @@ label form [type='radio'] {
   }
   .justify-space-between-md {
     justify-content: space-between;
+    display: flex;
+    flex-direction: column;
   }
   .justify-space-around-md {
     justify-content: space-around;
@@ -1646,6 +1648,7 @@ label form [type='radio'] {
   .col-lg-3 {
     flex: 0 0 25%;
     max-width: 25%;
+    margin-bottom: 10px;
   }
   .col-lg-4 {
     flex: 0 0 33.33333%;
@@ -1853,12 +1856,13 @@ label form [type='radio'] {
     margin: 5px;
     border-radius: 10px;
     padding: 5px;
+    width: 100%;
   }
 
   .ATC-btn-pos {
     /* display: flex;
     justify-self: center; */
-    width: 99%;
+    width: 102%;
     border-radius: 15px;
   
   }
@@ -1885,5 +1889,12 @@ label form [type='radio'] {
     justify-content: center;
     color: #3B3923;
     font-weight: bold;
+  }
+
+  .inv-card-header {
+    text-decoration: underline;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
