@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+import kingDice from '../../assets/kingDice.jpeg'
 
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
@@ -11,6 +12,12 @@ const LandingPage = () => {
   const [thoughtText, setThoughtText] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
+
+  // accumulates the items added to cart by the user 
+  const [itemCount, setItemCount] = useState(0);
+
+  // adds up and updates the total items in the gm's store
+  const [totalAvailableItems, setTotalAvailableItems] = useState(0);
 
   const [addThought, { error }] = useMutation
   (ADD_THOUGHT, {
@@ -50,37 +57,37 @@ const LandingPage = () => {
 
   return (
     <div>
-      <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
 
       {Auth.loggedIn() ? (
         <>
           <p
             className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
+              itemCount === totalAvailableItems || error ? 'text-danger' : ''
+              // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            Character Count: {characterCount}/280
+            Browse Inventory {totalAvailableItems} / {totalAvailableItems.length}
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
-              <textarea
+              <section
                 name="thoughtText"
                 placeholder="Here's a new thought..."
                 value={thoughtText}
                 className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleChange}
-              ></textarea>
+                style={{height: 'auto', resize: 'vertical' }}
+                onChange={handleChange}>
+              </section>
             </div>
 
             <div className="col-12 col-lg-3">
 
               {/* remove this */}
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Thought
+                Add Item
               </button>
             </div>
             {error && (
@@ -91,11 +98,15 @@ const LandingPage = () => {
           </form>
         </>
       ) : (
+        <div>
         <p className='login-prompt'>
           You need to be logged in to see the GM's store. Please{' '}
           <Link to="/login" style={{marginRight: 5, marginLeft: 5}}> login </Link> or <Link to="/signup" style={{marginRight: 5, marginLeft: 5}}>signup.</Link>
         </p>
-        
+        <div className='pos-main-icon'>
+         <img src={kingDice} className='icon-sizing' />
+         </div>
+         </div>
       )}
     </div>
   );

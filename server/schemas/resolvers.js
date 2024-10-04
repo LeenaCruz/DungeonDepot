@@ -1,119 +1,181 @@
-const { User, Thought } = require('../models');
+const { User, Item } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+const axios = require('axios');
+
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().populate('thoughts');
-    },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts');
-    },
-    thoughts: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
-    },
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
-    },
-    me: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
-      }
-      throw AuthenticationError;
-    },
-  },
+    items: async () => {
+      try {
+          // Fetch the list of equipment
+          const response = await axios.get('https://www.dnd5eapi.co/api/equipment');
+          const items = response.data.results; // Get the list of items
 
-  Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
-    },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+          // Array to hold detailed item data
+          const detailedItems = [];
 
-      if (!user) {
-        throw AuthenticationError;
-      }
+          // Loop through each item to fetch detailed information
+          for (const item of items) {
+              const itemResponse = await axios.get(`https://www.dnd5eapi.co/api/equipment/${item.index}`);
+              const detailedItem = itemResponse.data;
 
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
-
-      const token = signToken(user);
-
-      return { token, user };
-    },
-    addThought: async (parent, { thoughtText }, context) => {
-      if (context.user) {
-        const thought = await Thought.create({
-          thoughtText,
-          thoughtAuthor: context.user.username,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { thoughts: thought._id } }
-        );
-
-        return thought;
-      }
-      throw AuthenticationError;
-    },
-    addComment: async (parent, { thoughtId, commentText }, context) => {
-      if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
+              // Push the detailed item to the array
+              detailedItems.push({
+                  name: detailedItem.name,
+                  description: detailedItem.description ? detailedItem.description.join(' ') : 'No description available',
+                  cost: detailedItem.cost.quantity ? detailedItem.cost.quantity.join(' ') : 'No cost available',
+                  category: detailedItem.equipment_category.name ? detailedItem.equipment_category.name.join(' ') : 'No category available',
+                  rarity: detailedItem.rarity ? detailedItem.rarity.join('') : 'No rarity availiable',
+              });
           }
-        );
+
+          // Insert detailed items into MongoDB
+          await Item.insertMany(detailedItems);
+
+          return detailedItems; // Return the detailed items
+      } catch (error) {
+          console.error('Error fetching items from D&D API:', error);
+          throw new Error('Failed to fetch items');
       }
-      throw AuthenticationError;
+  },
+
+    // items: async (parent, { item, name, category }) => {
+    //   const params = {};
+
+    //   if (category) {
+    //     params.items.category = category;
+    //   }
+
+    //   if (name) {
+    //     params.name = {
+    //       $regex: name
+    //     };
+    //   }
+
+    //   return await Item.find(params).populate('category');
+    // },
+    item: async (parent, { _id }) => {
+      return await Item.findById(_id).populate('item');
     },
-    removeThought: async (parent, { thoughtId }, context) => {
+    user: async (parent, args, context) => {
       if (context.user) {
-        const thought = await Thought.findOneAndDelete({
-          _id: thoughtId,
-          thoughtAuthor: context.user.username,
+        const user = await User.findById(context.user._id).populate({
+          path: 'inventory.item',
+          populate: 'item'
         });
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { thoughts: thought._id } }
-        );
+        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
-        return thought;
+        return user;
       }
+
       throw AuthenticationError;
     },
-    removeComment: async (parent, { thoughtId, commentId }, context) => {
+    store: async (parent, { _id }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
-          {
-            $pull: {
-              comments: {
-                _id: commentId,
-                commentAuthor: context.user.username,
-              },
-            },
-          },
-          { new: true }
-        );
+        const user = await User.findById(context.user._id).populate({
+          path: '.products',
+          populate: 'category'
+        });
+
+        return user.orders.id(_id);
       }
+
       throw AuthenticationError;
     },
+    // checkout: async (parent, args, context) => {
+    //   const url = new URL(context.headers.referer).origin;
+    //   const order = new Order({ products: args.products });
+    //   const line_items = [];
+
+    //   const { products } = await order.populate('products');
+
+    //   for (let i = 0; i < products.length; i++) {
+    //     const product = await stripe.products.create({
+    //       name: products[i].name,
+    //       description: products[i].description,
+    //       images: [`${url}/images/${products[i].image}`]
+    //     });
+
+    //     const price = await stripe.prices.create({
+    //       product: product.id,
+    //       unit_amount: products[i].price * 100,
+    //       currency: 'usd',
+    //     });
+
+    //     line_items.push({
+    //       price: price.id,
+    //       quantity: 1
+    //     });
+    //   }
+
+    //   const session = await stripe.checkout.sessions.create({
+    //     payment_method_types: ['card'],
+    //     line_items,
+    //     mode: 'payment',
+    //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+    //     cancel_url: `${url}/`
+    //   });
+
+    //   return { session: session.id };
+    // }
   },
+  Mutation: {
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+
+      return { token, user };
+    },
+  }
 };
 
 module.exports = resolvers;
+
+
+// addUser: async (parent, args) => {
+    //   const user = await User.create(args);
+    //   const token = signToken(user);
+
+    //   return { token, user };
+    // },
+    // addOrder: async (parent, { products }, context) => {
+    //   if (context.user) {
+    //     const order = new Order({ products });
+
+    //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+    //     return order;
+    //   }
+
+    //   throw AuthenticationError;
+    // },
+    // updateUser: async (parent, args, context) => {
+    //   if (context.user) {
+    //     return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+    //   }
+
+    //   throw AuthenticationError;
+    // },
+    // updateProduct: async (parent, { _id, quantity }) => {
+    //   const decrement = Math.abs(quantity) * -1;
+
+    //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+    // },
+    // login: async (parent, { email, password }) => {
+    //   const user = await User.findOne({ email });
+
+    //   if (!user) {
+    //     throw AuthenticationError;
+    //   }
+
+    //   const correctPw = await user.isCorrectPassword(password);
+
+    //   if (!correctPw) {
+    //     throw AuthenticationError;
+    //   }
+
+    //   const token = signToken(user);
+
+    //   return { token, user };
+    // }

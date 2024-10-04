@@ -3,23 +3,34 @@ const typeDefs = `
     _id: ID
     username: String
     email: String
-    password: String
-    thoughts: [Thought]!
+    role: String
+    wallet: Int
+    inventory: [Item]
+    stores: [Store]
+    cart: [CartItem]
   }
 
-  type Thought {
+  type Store {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
+    name: String
+    description: String
+    owner: User
+    items: [Item]
+    transaction: [Transaction]
   }
 
-  type Comment {
+  type Item {
     _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String
+    name: String
+    description: String
+    cost: Int
+    type: String
+    rarity: String
+  }
+  
+  type CartItem {
+    item: Item
+    quantity: Int
   }
 
   type Auth {
@@ -27,21 +38,29 @@ const typeDefs = `
     user: User
   }
 
+  type Transaction {
+    _id: ID
+    name: String
+  }
+
   type Query {
     users: [User]
     user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
+    stores: [Store]
+    store(storeId: ID!): Store
+    items(storeId: ID!): [Item]
+    item(itemId: ID!): Item
     me: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    createStore(name: String!, description: String!): Store
+    addItemToStore(storeId: ID!, name: String!, description: String!, cost: Int!, type: String!, rarity: String): Item
+    addToCart(itemId: ID!, quantity: Int!): User
+    purchaseItems: User
+    removeItemFromCart(itemId: ID!): User
   }
 `;
 

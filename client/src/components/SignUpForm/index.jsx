@@ -1,9 +1,3 @@
-
-
-
-
-
-
 const Profile = () => {
     const { username: userParam } = useParams();
   
@@ -53,7 +47,7 @@ const Profile = () => {
               className="col-12 col-md-10 mb-3 p-3"
               style={{ border: '1px dotted #1a1a1a' }}
             >
-              <BeginForm />
+              <Profile />
             </div>
           )}
         </div>

@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
 const userSchema = new Schema({
   username: {
@@ -22,7 +23,7 @@ const userSchema = new Schema({
   role: {
     type: String,
     enum: ['gm', 'player'], // Only GM or Player roles allowed
-    required: true,
+    required: false,
   },
   wallet: {
     type: Number,
@@ -37,7 +38,7 @@ const userSchema = new Schema({
   ],
   stores: [
     {
-      types: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Store', // Stores owned by GMs
     },
   ],

@@ -1,17 +1,18 @@
-import { Navigate, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+// import { Navigate, useParams } from 'react-router-dom';
+// import { useQuery } from '@apollo/client';
 
-import BeginForm from '../components/LandingPageForm';
-import ThoughtList from '../components/ThoughtList';
+// import BeginForm from '../components/LandingPageForm';
+// import ThoughtList from '../components/ThoughtList';
 
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+// import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
-import Auth from '../utils/auth';
+// import Auth from '../utils/auth';
 
 
-const hommePage = () => {
+const homePage = () => {
   return (
     <h4>
+      IM THE DASHBOARD
       You need to be logged in to see this. Use the navigation links above to
       sign up or log in!
     </h4>
@@ -77,4 +78,4 @@ const hommePage = () => {
 
 // export default Profile;
 
-export default hommePage;
+export default homePage;
