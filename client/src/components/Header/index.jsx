@@ -14,7 +14,7 @@ const Header = () => {
           <Link className="text-light" to="/">
             <h1 className="m-0">Dungeon Depot</h1>
           </Link>
-          <p className="m-0">Structured gaming experience all in one place!</p>
+          <p className="m-0">Buy, sell and loot!</p>
         </div>
         <div>
           {Auth.loggedIn() ? (

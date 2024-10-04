@@ -7,15 +7,48 @@
 // import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 // import Auth from '../utils/auth';
-
+// We didnt have bootstrap installed
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const homePage = () => {
   return (
-    <h4>
-      IM THE DASHBOARD
-      You need to be logged in to see this. Use the navigation links above to
-      sign up or log in!
-    </h4>
+    <div className="container">
+      <div className="row mb-3">
+        <div className="col-md-3 col-sm-12" >
+          {/* Side box define style  */}
+          <div className="sideBox"> <h4> User Inventory or Current Shop</h4>
+            <div> Wallet:</div>
+            <div>$000</div>
+          </div>
+        </div>
+        <div className=" col-md-6 col-sm-12">
+  <div className="contentBox">
+    <div> "Name of the GameMaster's" Shop</div>
+    <div> Stores </div>
+  </div>
+</div>
+<div className="col-md-3 col-sm-12"> 
+  <div className="sideBox"> 
+    <h4>Cart</h4> 
+  <div> Item List Component?</div>
+     <button>Checkout</button>
+    
+  </div>
+</div>
+      </div>
+
+<div className="row"> 
+  <div className="col-12">
+    <div className="itemDescription"> 
+      <h4>Item Description </h4> 
+    <div> Item Details Component?</div></div> 
+  
+  </div>
+</div>
+
+    </div>
+
+
   );
 }
 

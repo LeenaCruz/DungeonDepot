@@ -12,6 +12,14 @@
   /* 2 */
 }
 
+:root {
+--primary-color: #D6A143;
+--secondary-color: #E5C3A1;
+--box-color: #7EAEC8;
+--button-color: #C64C37;
+--secondary-button: #614064;
+--background-color: #D3B199;
+}
 /* Sections
    ========================================================================== */
 /**
@@ -360,6 +368,7 @@ body {
   /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
   font-size: 16px;
   color: #1a1a1a;
+  background-color:var(--background-color);
 
   /* 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
   Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -954,7 +963,7 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: #736F4E !important;
+  background-color: #D6A143 !important;
 }
 
 .bg-info {
@@ -1399,6 +1408,36 @@ label form [type='radio'] {
   flex: 0 0 100%;
   max-width: 100%;
 }
+/* Own classes */
+.sideBox {
+  color: #000000;
+  background-color: var(--box-color);
+  height: 50vh;
+  width: 25vh;
+  padding: 10px;
+}
+
+.contentBox { 
+  color:#000000;
+ background-color: var(--secondary-color);
+ height: 50vh;
+ text-align: center;
+ padding: 10px;
+}
+
+.itemDescription {
+  color: #000000;
+  text-align: center;
+  background-color: var(--secondary-color);
+  height: 20vh;
+  margin-bottom: 18px;
+  padding:10px;
+  
+}
+
+
+
+
 
 /* col-sm */
 @media screen and (min-width: 640px) {

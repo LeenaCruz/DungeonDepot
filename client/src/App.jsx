@@ -8,6 +8,7 @@ import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+
 // const axios = require('axios');
 
 // Construct our main GraphQL API endpoint
