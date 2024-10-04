@@ -10,12 +10,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 // const axios = require('axios');
 
-// api  
-// import { useEffect, useState } from "react";
-// import { getAllSpells } from './api';
-// import SpellCard from './pages/spellCard';
-
-
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -44,11 +38,6 @@ const client = new ApolloClient({
 
 function App() {
 
-  // const [spells, setSpells] = useState([]);
-  //   useEffect(() => {
-  //   getAllSpells().then(setSpells);
-  //   }, []);
-
   return (
     <ApolloProvider client={client}>
       <div className="flex-column justify-flex-start min-100-vh">
@@ -59,17 +48,6 @@ function App() {
         <Footer />
       </div>
 
-       
-    {/* <div className="inv-items-div">
-      <ul className="spell-list">
-        {spells.map((spell) => (
-          <div className='atc-div'>
-          <SpellCard key={spell.index} spell={spell} />
-          <button className='ATC-btn-pos'>Add To Cart</button>
-          </div>
-          ))}
-          </ul>
-    </div> */}
 
     </ApolloProvider>
   );

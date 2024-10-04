@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllSpells } from "../../api";
 import SpellCard from "../../pages/spellCard";
 
+// api  
 const Inventory = () => {
 
     const [spells, setSpells] = useState([]);
