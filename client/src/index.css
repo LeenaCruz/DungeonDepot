@@ -1785,9 +1785,10 @@ label form [type='radio'] {
   .inv-items-div {
     height: auto;
     min-width: 30px;
-    /* border: 2px solid; */
-    color: black;
+    color: #3B3923;
     margin: 20px;
+    display: grid;
+    justify-items: center;
 
   }
 
@@ -1804,5 +1805,17 @@ label form [type='radio'] {
     align-items: center;
     margin: 5px;
     border-radius: 10px;
+    padding: 5px;
+  }
+
+  .ATC-btn-pos {
+    /* display: flex;
+    justify-self: center; */
+    width: 100%;
+    border-radius: 15px;
+  
+  }
+  .ATC-btn-pos:hover {
+    background-color: #B4C292;
   }
 }
