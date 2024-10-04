@@ -23,7 +23,7 @@ const userSchema = new Schema({
   role: {
     type: String,
     enum: ['gm', 'player'], // Only GM or Player roles allowed
-    required: true,
+    required: false,
   },
   wallet: {
     type: Number,
