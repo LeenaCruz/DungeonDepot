@@ -43,7 +43,7 @@ main {
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Grouping content
@@ -384,6 +384,8 @@ h6 {
   font-family: 'JetBrains Mono', monospace;
   margin: 0 0 0.5rem;
   line-height: 1.25;
+  color:#000000
+  
 }
 
 h1 {
@@ -414,6 +416,7 @@ p {
   font-size: 1.1rem;
   margin: 0 0 1rem;
   line-height: 1.5;
+  color:#000000
 }
 
 ul,
