@@ -440,6 +440,7 @@ button {
 footer {
   background-color: #736F4E;
   color: aliceblue;
+  text-align: center;
 }
 
 a {
@@ -1418,6 +1419,8 @@ label form [type='radio'] {
   height: 50vh;
   width: 25vh;
   padding: 10px;
+  border: 3px dashed var(--secondary-button);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .contentBox { 
@@ -1426,6 +1429,8 @@ label form [type='radio'] {
  height: 50vh;
  text-align: center;
  padding: 10px;
+ /* border: 3px dashed var(--button-color); */
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .itemDescription {
@@ -1435,7 +1440,8 @@ label form [type='radio'] {
   height: 20vh;
   margin-bottom: 18px;
   padding:10px;
-  
+  border: 3px dashed var(--secondary-button);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -1875,6 +1881,6 @@ label form [type='radio'] {
 
   .card-bord {
     margin-top: 10px;
-    border: ;
+    /* border: ; */
   }
 }
