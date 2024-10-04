@@ -13,6 +13,12 @@ const LandingPage = () => {
 
   const [characterCount, setCharacterCount] = useState(0);
 
+  // accumulates the items added to cart by the user 
+  const [itemCount, setItemCount] = useState(0);
+
+  // adds up and updates the total items in the gm's store
+  const [totalAvailableItems, setTotalAvailableItems] = useState(0);
+
   const [addThought, { error }] = useMutation
   (ADD_THOUGHT, {
     refetchQueries: [
@@ -56,31 +62,32 @@ const LandingPage = () => {
         <>
           <p
             className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
+              itemCount === totalAvailableItems || error ? 'text-danger' : ''
+              // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            Character Count: {characterCount}/280
+            Browse Inventory {totalAvailableItems} / {totalAvailableItems.length}
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
-              <textarea
+              <section
                 name="thoughtText"
                 placeholder="Here's a new thought..."
                 value={thoughtText}
                 className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleChange}
-              ></textarea>
+                style={{height: 'auto', resize: 'vertical' }}
+                onChange={handleChange}>
+              </section>
             </div>
 
             <div className="col-12 col-lg-3">
 
               {/* remove this */}
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Thought
+                Add Item
               </button>
             </div>
             {error && (
