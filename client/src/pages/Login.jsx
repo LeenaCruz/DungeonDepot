@@ -49,9 +49,24 @@ const Login = (props) => {
             {data ? (
               <p>
                 <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
-                Success! You may now head{' '}
+                Check the invetory below! Don't forget to checkout! {' '}
                 <Link to="/me">to your Dashboard.</Link>
+
+
+                <div className="col-12 col-lg-10">
+                  <div className="card inventory-list">
+                    <h4 className="login-card-header-style">Inventory</h4>
+                      <div className="card-body ">
+
+                        
+                        Add Inventory scrollable list here 
+                    </div>
+                  </div>
+                </div>
               </p>
+
+
+
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input

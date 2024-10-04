@@ -1774,4 +1774,11 @@ label form [type='radio'] {
   .align-content-center-xl {
     align-content: center;
   }
+
+  .inventory-list {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    width: 100%;
+  }
 }
