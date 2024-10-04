@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
+import Inventory  from '../components/InventoryList'
 
 import Auth from '../utils/auth';
 
@@ -56,8 +57,9 @@ const Login = (props) => {
                 <div className="col-12 col-lg-10">
                   <div className="card inventory-list">
                     <h4 className="login-card-header-style">Inventory</h4>
-                      <div className="card-body ">
+                      <div className="card-body all-inv">
 
+                        <Inventory />
                         
                         Add Inventory scrollable list here 
                     </div>
