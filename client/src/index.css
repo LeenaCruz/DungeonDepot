@@ -368,7 +368,8 @@ body {
   /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
   font-size: 16px;
   color: #1a1a1a;
-  background-color:var(--background-color);
+   background-color: white;
+  /* background-color:var(--background-color); */
 
   /* 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
   Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -1444,10 +1445,6 @@ label form [type='radio'] {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-
-
-
 /* col-sm */
 @media screen and (min-width: 640px) {
   .col-sm-auto {
@@ -1599,6 +1596,8 @@ label form [type='radio'] {
   }
   .justify-space-between-md {
     justify-content: space-between;
+    display: flex;
+    flex-direction: column;
   }
   .justify-space-around-md {
     justify-content: space-around;
@@ -1655,6 +1654,7 @@ label form [type='radio'] {
   .col-lg-3 {
     flex: 0 0 25%;
     max-width: 25%;
+    margin-bottom: 10px;
   }
   .col-lg-4 {
     flex: 0 0 33.33333%;
@@ -1862,12 +1862,13 @@ label form [type='radio'] {
     margin: 5px;
     border-radius: 10px;
     padding: 5px;
+    width: 100%;
   }
 
   .ATC-btn-pos {
     /* display: flex;
     justify-self: center; */
-    width: 99%;
+    width: 102%;
     border-radius: 15px;
   
   }
@@ -1882,5 +1883,24 @@ label form [type='radio'] {
   .card-bord {
     margin-top: 10px;
     /* border: ; */
+  }
+
+  .message-pos {
+    display: flex;
+    justify-content: center;
+  }
+
+  .dashboard-pos {
+    display: flex;
+    justify-content: center;
+    color: #3B3923;
+    font-weight: bold;
+  }
+
+  .inv-card-header {
+    text-decoration: underline;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }

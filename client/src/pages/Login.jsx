@@ -41,6 +41,18 @@ const Login = (props) => {
     });
   };
 
+
+// Add the inventory list data to have the loading component show when data is pending 
+  // const { loading, data } = useQuery(QUERY_SINGLE_THOUGHT, {
+  //   // pass URL parameter
+  //   variables: { thoughtId: thoughtId },
+  // });
+  // const thought = data?.thought || {};
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
   return (
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
@@ -50,8 +62,9 @@ const Login = (props) => {
             {data ? (
               <p>
                 <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
-                Check the invetory below! Don't forget to checkout! {' '}
-                <Link to="/me">to your Dashboard.</Link>
+                <h4 className='message-pos'> Check the invetory below!</h4> 
+                <div> {' '} </div>
+                <Link to="/me" className='dashboard-pos'>Open your Dashboard.</Link>
 
 
                 <div className="col-12 col-lg-10">
