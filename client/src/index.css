@@ -1438,10 +1438,6 @@ label form [type='radio'] {
   
 }
 
-
-
-
-
 /* col-sm */
 @media screen and (min-width: 640px) {
   .col-sm-auto {
@@ -1875,6 +1871,18 @@ label form [type='radio'] {
 
   .card-bord {
     margin-top: 10px;
-    border: ;
+    /* border: ; */
+  }
+
+  .message-pos {
+    display: flex;
+    justify-content: center;
+  }
+
+  .dashboard-pos {
+    display: flex;
+    justify-content: center;
+    color: #3B3923;
+    font-weight: bold;
   }
 }

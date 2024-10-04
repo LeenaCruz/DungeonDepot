@@ -50,8 +50,9 @@ const Login = (props) => {
             {data ? (
               <p>
                 <h3 className='welcome-message'>Check your gaming wallet and add items to your cart!</h3>
-                Check the invetory below! Don't forget to checkout! {' '}
-                <Link to="/me">to your Dashboard.</Link>
+                <h4 className='message-pos'> Check the invetory below! Don't forget to checkout! </h4> 
+                <div> {' '} </div>
+                <Link to="/me" className='dashboard-pos'>Open your Dashboard.</Link>
 
 
                 <div className="col-12 col-lg-10">
