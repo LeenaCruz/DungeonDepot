@@ -1781,4 +1781,28 @@ label form [type='radio'] {
     flex-direction: column;
     width: 100%;
   }
+
+  .inv-items-div {
+    height: auto;
+    min-width: 30px;
+    /* border: 2px solid; */
+    color: black;
+    margin: 20px;
+
+  }
+
+  .inv-items-div .h4 {
+    text-decoration: none;
+  }
+
+  .spell-card {
+    width: 300px;
+    height: auto;
+    border: 3px solid #3B3923;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    border-radius: 10px;
+  }
 }
