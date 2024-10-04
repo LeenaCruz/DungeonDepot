@@ -63,7 +63,7 @@ function App() {
     <div className="inv-items-div">
       <ul className="spell-list">
         {spells.map((spell) => (
-          <div>
+          <div className='atc-div'>
           <SpellCard key={spell.index} spell={spell} />
           <button className='ATC-btn-pos'>Add To Cart</button>
           </div>

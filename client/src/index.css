@@ -1811,11 +1811,15 @@ label form [type='radio'] {
   .ATC-btn-pos {
     /* display: flex;
     justify-self: center; */
-    width: 100%;
+    width: 99%;
     border-radius: 15px;
   
   }
   .ATC-btn-pos:hover {
     background-color: #B4C292;
+  }
+
+  .atc-div {
+    margin-bottom: 20px;
   }
 }
