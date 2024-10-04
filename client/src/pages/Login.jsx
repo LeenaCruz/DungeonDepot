@@ -55,13 +55,12 @@ const Login = (props) => {
 
 
                 <div className="col-12 col-lg-10">
-                  <div className="card inventory-list">
-                    <h4 className="login-card-header-style">Inventory</h4>
+                  <div className="card-bord inventory-list">
+                    <h4 className="login-card-header-style inv-header">Inventory</h4>
                       <div className="card-body all-inv">
 
                         <Inventory />
                         
-                        Add Inventory scrollable list here 
                     </div>
                   </div>
                 </div>
