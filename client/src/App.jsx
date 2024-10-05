@@ -9,6 +9,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+// import AuthService from './utils/auth'
 // const axios = require('axios');
 
 // Construct our main GraphQL API endpoint
@@ -20,6 +21,8 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
+  // const token = AuthService.getToken();
+  console.log("Token:", token);
   // return the headers to the context so httpLink can read them
   return {
     headers: {

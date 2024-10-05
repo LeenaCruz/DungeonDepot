@@ -6,7 +6,7 @@ import Inventory  from '../components/InventoryList'
 
 import Auth from '../utils/auth';
 
-const Login = (props) => {
+const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
@@ -30,15 +30,16 @@ const Login = (props) => {
       });
 
       Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
-    }
-
-    // clear form values
+        // clear form values
     setFormState({
       email: '',
       password: '',
     });
+    } catch (e) {
+      console.error(e);
+    }
+
+  
   };
 
 

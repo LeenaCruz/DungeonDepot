@@ -1,46 +1,42 @@
+import React from 'react';
 // import { Navigate, useParams } from 'react-router-dom';
 // import { useQuery } from '@apollo/client';
 
 // import BeginForm from '../components/LandingPageForm';
 // import ThoughtList from '../components/ThoughtList';
 
-// import { QUERY_USER, QUERY_ME } from '../utils/queries';
-// import {QUERY_ME} from '../utils/queries'
-// import { QUERY_USER } from '../utils/queries';
-// import Auth from '../utils/auth';
+
+import {QUERY_ME} from '../utils/queries'
+import AuthService from '../utils/auth';
 // We didnt have bootstrap installed
 // import 'bootstrap/dist/css/bootstrap.min.css';
-// import AuthService from '../utils/auth'
-// import Auth from '../../utils/auth';
-// import {useQuery} from '@apollo/client';
+
+import {useQuery} from '@apollo/client';
 
 
 const homePage = () => {
  
-  // const username = Auth.getProfile().authenticatedPerson.username;
-  // const {loading, error, data} = useQuery(GET_USER_WALLET);
 
-// const {loading,error,data} = useQuery(QUERY_USER, {
+const {loading,error, data} = useQuery(QUERY_ME);
+if (loading) return <p>Loading...</p>;
+if (error) return <p>Error: {error.message}</p>
 
-// variables: { username },
-// });
-// // const {loading,error, data} = useQuery(QUERY_ME);
-// if (loading) return <p>Loading...</p>;
-// if (error) return <p>Error: {error.message}</p>
 
-//   console.log(data)
 
   return (
+
+<div>
+
+{AuthService.loggedIn() ? (
+  <>
+
     <div className="container">
       <div className="row mb-3">
         <div className="col-md-3 col-sm-12" >
-          {/* Side box define style  */}
           <div className="sideBox"> <h4> User Inventory or Current Shop</h4>
             <div> Wallet:</div>
-            {/* <p>$: {data ? data.getUserWallet : "0"}</p> */}
-            {/* <p>$: {data.user.username}</p> */}
-            {/* <p>Balance: ${data.me.username}</p> */}
-            <p> $000</p>
+            {data?.me?.username ?? 'N/A'}
+           <p>${data?.me?.wallet ?? 'N/A'}</p> 
           </div>
         </div>
         <div className=" col-md-6 col-sm-12">
@@ -70,6 +66,18 @@ const homePage = () => {
 
     </div>
 
+
+
+    </>
+) : (
+  <>
+  <div>
+    <h4> You are not logged in.</h4>
+    </div>
+    </>
+
+)}
+    </div>
 
   );
 }
