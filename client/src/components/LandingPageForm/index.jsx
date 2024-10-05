@@ -76,6 +76,7 @@ const LandingPage = () => {
               // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
+            <h3> Inventory </h3>
             Browse Inventory {totalAvailableItems} / {listLength}
           </p>
           <form
