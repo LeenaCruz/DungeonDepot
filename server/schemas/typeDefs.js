@@ -1,46 +1,49 @@
 const typeDefs = `
   type User {
-    _id: ID
-    username: String
-    email: String
-    role: String
-    wallet: Int
+    _id: ID!
+    username: String!
+    email: String!
+    role: String!  # GM or Player
+    wallet: Int!
     inventory: [Item]
     stores: [Store]
     cart: [CartItem]
   }
 
   type Store {
-    _id: ID
-    name: String
+    _id: ID!
+    name: String!
     description: String
-    owner: User
+    owner: User!
     items: [Item]
-    transaction: [Transaction]
+    transactions: [Transaction]
   }
 
   type Item {
-    _id: ID
-    name: String
-    description: String
-    cost: Int
-    type: String
+    _id: ID!
+    name: String!
+    description: String!
+    cost: Int!
+    category: String!
     rarity: String
   }
-  
+
   type CartItem {
-    item: Item
-    quantity: Int
+    item: Item!
+    quantity: Int!
   }
 
   type Auth {
     token: ID!
-    user: User
+    user: User!
   }
 
   type Transaction {
-    _id: ID
-    name: String
+    _id: ID!
+    player: User!
+    item: Item!
+    cost: Int!
+    date: String!
   }
 
   type Query {
@@ -54,13 +57,21 @@ const typeDefs = `
   }
 
   type Mutation {
+
     addUser(username: String!, email: String!, password: String!): Auth
+
     login(email: String!, password: String!): Auth
+
     createStore(name: String!, description: String!): Store
-    addItemToStore(storeId: ID!, name: String!, description: String!, cost: Int!, type: String!, rarity: String): Item
+
+    addItemToStore(storeId: ID!, name: String!, description: String!, cost: Int!, category: String!, rarity: String): Item
+
     addToCart(itemId: ID!, quantity: Int!): User
+
     purchaseItems: User
+
     removeItemFromCart(itemId: ID!): User
+
   }
 `;
 

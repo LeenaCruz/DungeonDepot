@@ -1,181 +1,100 @@
-const { User, Item } = require('../models');
+const { User, Item, Store } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const axios = require('axios');
 
-
 const resolvers = {
   Query: {
+    // Fetch items from D&D API and insert them into MongoDB (Limit to 15 items)
     items: async () => {
       try {
-          // Fetch the list of equipment
-          const response = await axios.get('https://www.dnd5eapi.co/api/equipment');
-          const items = response.data.results; // Get the list of items
+        const response = await axios.get('https://www.dnd5eapi.co/api/equipment');
+        let items = response.data.results.slice(0, 15);
 
-          // Array to hold detailed item data
-          const detailedItems = [];
+        const detailedItems = [];
 
-          // Loop through each item to fetch detailed information
-          for (const item of items) {
-              const itemResponse = await axios.get(`https://www.dnd5eapi.co/api/equipment/${item.index}`);
-              const detailedItem = itemResponse.data;
+        for (const item of items) {
+          const itemResponse = await axios.get(`https://www.dnd5eapi.co/api/equipment/${item.index}`);
+          const detailedItem = itemResponse.data;
 
-              // Push the detailed item to the array
-              detailedItems.push({
-                  name: detailedItem.name,
-                  description: detailedItem.description ? detailedItem.description.join(' ') : 'No description available',
-                  cost: detailedItem.cost.quantity ? detailedItem.cost.quantity.join(' ') : 'No cost available',
-                  category: detailedItem.equipment_category.name ? detailedItem.equipment_category.name.join(' ') : 'No category available',
-                  rarity: detailedItem.rarity ? detailedItem.rarity.join('') : 'No rarity availiable',
-              });
-          }
+          detailedItems.push({
+            name: detailedItem.name,
+            description: detailedItem.desc ? detailedItem.desc.join(' ') : 'No description available',
+            cost: detailedItem.cost?.quantity || 0,
+            category: detailedItem.equipment_category?.name || 'No category available',
+            rarity: detailedItem.rarity || 'No rarity available',
+          });
+        }
 
-          // Insert detailed items into MongoDB
-          await Item.insertMany(detailedItems);
+        // Replace existing items with new data
+        await Item.deleteMany();
+        await Item.insertMany(detailedItems);
 
-          return detailedItems; // Return the detailed items
+        return detailedItems;
       } catch (error) {
-          console.error('Error fetching items from D&D API:', error);
-          throw new Error('Failed to fetch items');
+        console.error('Error fetching items:', error);
+        throw new Error('Failed to fetch items');
       }
-  },
-
-    // items: async (parent, { item, name, category }) => {
-    //   const params = {};
-
-    //   if (category) {
-    //     params.items.category = category;
-    //   }
-
-    //   if (name) {
-    //     params.name = {
-    //       $regex: name
-    //     };
-    //   }
-
-    //   return await Item.find(params).populate('category');
-    // },
-    item: async (parent, { _id }) => {
-      return await Item.findById(_id).populate('item');
     },
+
+    // Fetch a single item by ID
+    item: async (parent, { _id }) => {
+      return await Item.findById(_id);
+    },
+
+    // Fetch logged-in user's data, including inventory
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'inventory.item',
-          populate: 'item'
-        });
-
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
+        const user = await User.findById(context.user._id).populate('inventory.item');
         return user;
       }
-
-      throw AuthenticationError;
+      throw new AuthenticationError('You must be logged in');
     },
+
+    // Fetch a store by ID and its items
     store: async (parent, { _id }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: '.products',
-          populate: 'category'
-        });
-
-        return user.orders.id(_id);
+        const store = await Store.findById(_id).populate('items');
+        return store;
       }
-
-      throw AuthenticationError;
-    },
-    // checkout: async (parent, args, context) => {
-    //   const url = new URL(context.headers.referer).origin;
-    //   const order = new Order({ products: args.products });
-    //   const line_items = [];
-
-    //   const { products } = await order.populate('products');
-
-    //   for (let i = 0; i < products.length; i++) {
-    //     const product = await stripe.products.create({
-    //       name: products[i].name,
-    //       description: products[i].description,
-    //       images: [`${url}/images/${products[i].image}`]
-    //     });
-
-    //     const price = await stripe.prices.create({
-    //       product: product.id,
-    //       unit_amount: products[i].price * 100,
-    //       currency: 'usd',
-    //     });
-
-    //     line_items.push({
-    //       price: price.id,
-    //       quantity: 1
-    //     });
-    //   }
-
-    //   const session = await stripe.checkout.sessions.create({
-    //     payment_method_types: ['card'],
-    //     line_items,
-    //     mode: 'payment',
-    //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-    //     cancel_url: `${url}/`
-    //   });
-
-    //   return { session: session.id };
-    // }
+      throw new AuthenticationError('You must be logged in');
+    }
   },
+
   Mutation: {
+    // Register a new user
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
-
       return { token, user };
     },
+
+    // Create a new store (only for logged-in users)
+    createStore: async (parent, { name, description }, context) => {
+      if (context.user) {
+        const store = await Store.create({ name, description, owner: context.user._id });
+        await User.findByIdAndUpdate(context.user._id, { $push: { stores: store._id } });  // Update GM's stores
+        return store;
+      }
+      throw new AuthenticationError('You must be logged in');
+    },
+
+    // Add an item to a store (only for logged-in users)
+    addItemToStore: async (parent, { storeId, name, description, cost, category, rarity }, context) => {
+      if (context.user) {
+        const store = await Store.findById(storeId);
+        if (!store) {
+          throw new Error('Store not found');
+        }
+
+        const item = await Item.create({ name, description, cost, category, rarity });
+        store.items.push(item._id);  // Add the item to the store's items
+        await store.save();
+
+        return item;
+      }
+      throw new AuthenticationError('You must be logged in');
+    }
   }
 };
 
 module.exports = resolvers;
-
-
-// addUser: async (parent, args) => {
-    //   const user = await User.create(args);
-    //   const token = signToken(user);
-
-    //   return { token, user };
-    // },
-    // addOrder: async (parent, { products }, context) => {
-    //   if (context.user) {
-    //     const order = new Order({ products });
-
-    //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-    //     return order;
-    //   }
-
-    //   throw AuthenticationError;
-    // },
-    // updateUser: async (parent, args, context) => {
-    //   if (context.user) {
-    //     return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-    //   }
-
-    //   throw AuthenticationError;
-    // },
-    // updateProduct: async (parent, { _id, quantity }) => {
-    //   const decrement = Math.abs(quantity) * -1;
-
-    //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    // },
-    // login: async (parent, { email, password }) => {
-    //   const user = await User.findOne({ email });
-
-    //   if (!user) {
-    //     throw AuthenticationError;
-    //   }
-
-    //   const correctPw = await user.isCorrectPassword(password);
-
-    //   if (!correctPw) {
-    //     throw AuthenticationError;
-    //   }
-
-    //   const token = signToken(user);
-
-    //   return { token, user };
-    // }

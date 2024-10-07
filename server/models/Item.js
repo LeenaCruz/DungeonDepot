@@ -15,7 +15,7 @@ const itemSchema = new Schema({
         type: Number,
         required: true, // cost of the item in gold
     },
-    Category: { // ??? would this me type or category ???
+    category: { // ??? would this me type or category ???
         type: String,
         required: true, // type of item 'weapon', 'armor', 'potion'
     },
