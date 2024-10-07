@@ -71,6 +71,18 @@ const resolvers = {
 
       throw AuthenticationError;
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'inventory.item',
+          populate: 'item'
+        });
+          // user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+
+        return user;
+      }
+      throw AuthenticationError;
+    },
     store: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
@@ -82,7 +94,22 @@ const resolvers = {
       }
 
       throw AuthenticationError;
-    },
+    }, 
+// Trying to get userWallet
+//     getUserWallet: async (_,__, {context}) => {
+// if (!context.user) {
+//   throw new AuthenticationError('You must be logged in');
+// }
+
+// const {wallet} = await User.findById(context.user._id);
+// return wallet;
+//     }
+
+
+
+
+
+
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;
     //   const order = new Order({ products: args.products });
@@ -127,6 +154,19 @@ const resolvers = {
 
       return { token, user };
     },
+    login:  async (parent, {email, password}) => {
+      const user = await User.findOne({email});
+      if (!user) { 
+        throw  AuthenticationError;
+      }
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+          throw  AuthenticationError;
+      }
+      const token = signToken(user);
+      return {token, user};
+    }
   }
 };
 

@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import kingDice from '../../assets/kingDice.jpeg'
+import kingDice from '../../assets/kingDice.png'
 
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
+import Inventory from '../InventoryList';
+import { getAllSpells } from "../../api";
 
 import Auth from '../../utils/auth';
 
 const LandingPage = () => {
-  const [thoughtText, setThoughtText] = useState('');
+  // const [thoughtText, setThoughtText] = useState('');
 
-  const [characterCount, setCharacterCount] = useState(0);
+  // const [characterCount, setCharacterCount] = useState(0);
 
   // accumulates the items added to cart by the user 
   const [itemCount, setItemCount] = useState(0);
@@ -55,6 +57,14 @@ const LandingPage = () => {
     }
   };
 
+
+  // Not working 
+  let listLength;
+    getAllSpells((sData) => {
+      listLength = sData.length
+      // return listLength
+    })
+    
   return (
     <div>
 
@@ -66,7 +76,8 @@ const LandingPage = () => {
               // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            Browse Inventory {totalAvailableItems} / {totalAvailableItems.length}
+            <h3> Inventory </h3>
+            Browse Inventory {totalAvailableItems} / {listLength}
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
@@ -80,14 +91,13 @@ const LandingPage = () => {
                 className="form-input w-100"
                 style={{height: 'auto', resize: 'vertical' }}
                 onChange={handleChange}>
+                   <Inventory />
               </section>
             </div>
 
             <div className="col-12 col-lg-3">
-
-              {/* remove this */}
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Item
+                Checkout
               </button>
             </div>
             {error && (

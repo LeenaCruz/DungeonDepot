@@ -34,7 +34,7 @@ const typeDefs = `
   }
 
   type Auth {
-    token: ID!
+    token: String!
     user: User
   }
 
@@ -51,6 +51,7 @@ const typeDefs = `
     items(storeId: ID!): [Item]
     item(itemId: ID!): Item
     me: User
+    getUserWallet: Int
   }
 
   type Mutation {

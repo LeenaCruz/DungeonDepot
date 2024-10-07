@@ -12,6 +12,14 @@
   /* 2 */
 }
 
+:root {
+--primary-color: #D6A143;
+--secondary-color: #E5C3A1;
+--box-color: #7EAEC8;
+--button-color: #C64C37;
+--secondary-button: #614064;
+--background-color: #D3B199;
+}
 /* Sections
    ========================================================================== */
 /**
@@ -35,7 +43,7 @@ main {
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Grouping content
@@ -352,6 +360,7 @@ END NORMALIZE CSS
 html,
 body {
   min-height: 100%;
+
 }
 
 body {
@@ -360,6 +369,8 @@ body {
   /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
   font-size: 16px;
   color: #1a1a1a;
+   background-color: white;
+  /* background-color:var(--background-color); */
 
   /* 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
   Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -375,6 +386,8 @@ h6 {
   font-family: 'JetBrains Mono', monospace;
   margin: 0 0 0.5rem;
   line-height: 1.25;
+  color:#000000
+  
 }
 
 h1 {
@@ -405,6 +418,7 @@ p {
   font-size: 1.1rem;
   margin: 0 0 1rem;
   line-height: 1.5;
+  color:#000000
 }
 
 ul,
@@ -428,6 +442,7 @@ button {
 footer {
   background-color: #736F4E;
   color: aliceblue;
+  text-align: center;
 }
 
 a {
@@ -465,6 +480,29 @@ a:hover {
   font-weight: bold;
 
 }
+
+.wallet-div {
+  border: 1px solid black;
+  width: 300px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.wallet-header {
+  background-color: #526c4e;
+  /* color: #d9e9e8; */
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+.wallet-bal {
+  font-weight: bold;
+  color: rgb(89, 89, 89);
+  margin-top: 15px;
+  margin-left: 5px;
+}
+
 
 /* HEIGHT / WIDTH UTILS */
 .w-100 {
@@ -954,7 +992,7 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: #736F4E !important;
+  background-color: #D6A143 !important;
 }
 
 .bg-info {
@@ -1399,6 +1437,52 @@ label form [type='radio'] {
   flex: 0 0 100%;
   max-width: 100%;
 }
+/* Own classes */
+.sideBox {
+  color: #000000;
+  background-color: var(--box-color);
+  height: 50vh;
+  width: 25vh;
+  padding: 10px;
+  border: 3px dashed var(--secondary-button);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contentBox { 
+  color:#000000;
+ background-color: var(--secondary-color);
+ height: 50vh;
+ text-align: center;
+ padding: 10px;
+ /* border: 3px dashed var(--button-color); */
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.itemDescription {
+  color: #000000;
+  text-align: center;
+  background-color: var(--secondary-color);
+  height: 20vh;
+  margin-bottom: 18px;
+  padding:10px;
+  border: 3px dashed var(--secondary-button);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.item-row {
+  display:flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-name {
+  margin: 0;
+}
+
+.item-button {
+  padding: 5px 10px;
+  vertical-align: middle;
+}
 
 /* col-sm */
 @media screen and (min-width: 640px) {
@@ -1551,6 +1635,8 @@ label form [type='radio'] {
   }
   .justify-space-between-md {
     justify-content: space-between;
+    display: flex;
+    flex-direction: column;
   }
   .justify-space-around-md {
     justify-content: space-around;
@@ -1607,6 +1693,7 @@ label form [type='radio'] {
   .col-lg-3 {
     flex: 0 0 25%;
     max-width: 25%;
+    margin-bottom: 10px;
   }
   .col-lg-4 {
     flex: 0 0 33.33333%;
@@ -1780,6 +1867,8 @@ label form [type='radio'] {
     align-self: center;
     flex-direction: column;
     width: 100%;
+    position: relative;
+    left: 10%;
   }
 
   .inv-items-div {
@@ -1791,11 +1880,15 @@ label form [type='radio'] {
     justify-items: center;
     max-height: 500px;
     overflow-y: auto;
-
   }
 
   .inv-items-div .h4 {
     text-decoration: none;
+  }
+
+  .inv-header {
+    background-color: #3B3923;
+    border-radius: 30px;
   }
 
   .spell-card {
@@ -1808,12 +1901,13 @@ label form [type='radio'] {
     margin: 5px;
     border-radius: 10px;
     padding: 5px;
+    width: 100%;
   }
 
   .ATC-btn-pos {
     /* display: flex;
     justify-self: center; */
-    width: 99%;
+    width: 102%;
     border-radius: 15px;
   
   }
@@ -1823,5 +1917,29 @@ label form [type='radio'] {
 
   .atc-div {
     margin-bottom: 20px;
+  }
+
+  .card-bord {
+    margin-top: 10px;
+    /* border: ; */
+  }
+
+  .message-pos {
+    display: flex;
+    justify-content: center;
+  }
+
+  .dashboard-pos {
+    display: flex;
+    justify-content: center;
+    color: #3B3923;
+    font-weight: bold;
+  }
+
+  .inv-card-header {
+    text-decoration: underline;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
