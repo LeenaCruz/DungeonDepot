@@ -11,9 +11,9 @@ import { getAllSpells } from "../../api";
 import Auth from '../../utils/auth';
 
 const LandingPage = () => {
-  const [thoughtText, setThoughtText] = useState('');
+  // const [thoughtText, setThoughtText] = useState('');
 
-  const [characterCount, setCharacterCount] = useState(0);
+  // const [characterCount, setCharacterCount] = useState(0);
 
   // accumulates the items added to cart by the user 
   const [itemCount, setItemCount] = useState(0);
@@ -76,6 +76,7 @@ const LandingPage = () => {
               // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
+            <h3> Inventory </h3>
             Browse Inventory {totalAvailableItems} / {listLength}
           </p>
           <form

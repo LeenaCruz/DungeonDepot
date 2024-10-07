@@ -5,6 +5,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import Inventory  from '../components/InventoryList'
 
 import Auth from '../utils/auth';
+import Wallet from '../components/GamingWallet';
 
 const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -78,6 +79,8 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
+
+                <Wallet />
               </p>
 
 
