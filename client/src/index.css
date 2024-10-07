@@ -1446,6 +1446,21 @@ label form [type='radio'] {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.item-row {
+  display:flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-name {
+  margin: 0;
+}
+
+.item-button {
+  padding: 5px 10px;
+  vertical-align: middle;
+}
+
 /* col-sm */
 @media screen and (min-width: 640px) {
   .col-sm-auto {
