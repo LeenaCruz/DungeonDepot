@@ -12,7 +12,6 @@ const Wallet = () => {
       <div className="wallet-bal">
         Balance: 
       </div>
-      {/* <button> Checkout </button> */}
       </div>
     )  
 }
