@@ -1,4 +1,5 @@
 import  React, {useState } from 'react';
+import Wallet from '../components/GamingWallet';
 // import { Navigate, useParams } from 'react-router-dom';
 // import { useQuery } from '@apollo/client';
 
@@ -61,6 +62,7 @@ const homePage = () => {
                   <div> Wallet:</div>
                   {data?.me?.username ?? 'N/A'}
                   <p>${data?.me?.wallet ?? 'N/A'}</p>
+                  <Wallet />
                 </div>
               </div>
               <div className=" col-md-6 col-sm-12">

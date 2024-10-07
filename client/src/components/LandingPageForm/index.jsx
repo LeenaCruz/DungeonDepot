@@ -17,7 +17,8 @@ const LandingPage = () => {
 
   // accumulates the items added to cart by the user 
   const [itemCount, setItemCount] = useState(0);
-
+  //Define thoughtText
+const [thoughtText,setThoughtText] = useState(0);
   // adds up and updates the total items in the gm's store
   const [totalAvailableItems, setTotalAvailableItems] = useState(0);
 
