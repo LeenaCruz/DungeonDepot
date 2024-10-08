@@ -497,6 +497,12 @@ a:hover {
   align-items: center;
   border-radius: 10px;
   /* width: 100%; */
+  position: relative;
+  left: 45%;
+}
+
+.cart-text {
+  background-color: #526c4e;
 }
 
 .item-sep {
