@@ -121,7 +121,7 @@ const homePage = () => {
               <div className="row mb-3">
                 <div className="col-md-3 col-sm-12" >
                   <div className="sideBox"> <h4> CREATE SHOP</h4>
-                    <div> Shop Name </div>
+                    <p> Name </p>
                     {/* <form onSubmit = {handleFormSubmit}>
                     <input 
                     placeholder='Store Name'
@@ -147,20 +147,19 @@ const homePage = () => {
                     <SearchBar onSearch={handleSearch} />
 
                     <p>Results:</p>
-                    <div className='item-row'>
+                    {/* <div className='item-row'>
                       <p className='item-name'>Item Name</p>
                       <button className='item-button'>Add</button>
                     </div>
                     <div className='item-row'>
                       <p className='item-name'>Item Name</p>
                       <button className='item-button'>Add</button>
-                    </div>
+                    </div> */}
 
 <div className='shop-preview'>
-  <h2>Shop Name</h2>
-  <ul>
+  <ul className='item-list'>
     {filteredItems.map((item) => (
-      <li key={item.id}>
+      <li key={item.id} className='item-name' >
         {item.name}
         <button className='item-button'>Add
           </button></li>

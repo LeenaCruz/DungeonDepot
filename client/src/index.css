@@ -1490,12 +1490,22 @@ label form [type='radio'] {
 }
 
 .item-name {
+  text-decoration: none;
   margin: 0;
 }
 
 .item-button {
   padding: 5px 10px;
   vertical-align: middle;
+}
+
+.shop-preview ul {
+  margin-left: 0px;
+  list-style-type: none;
+}
+.item-list {
+font-weight: bold;
+
 }
 
 /* col-sm */
