@@ -6,9 +6,11 @@ import kingDice from '../../assets/kingDice.png'
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
 import Inventory from '../InventoryList';
-import { getAllSpells } from "../../api";
+import { getAllEquipment } from "../../api";
 
 import Auth from '../../utils/auth';
+import Login from '../../pages/Login';
+import Wallet from '../GamingWallet';
 
 const LandingPage = () => {
   // const [thoughtText, setThoughtText] = useState('');
@@ -61,7 +63,7 @@ const [thoughtText,setThoughtText] = useState(0);
 
   // Not working 
   let listLength;
-    getAllSpells((sData) => {
+    getAllEquipment((sData) => {
       listLength = sData.length
       // return listLength
     })
@@ -87,13 +89,12 @@ const [thoughtText,setThoughtText] = useState(0);
             <div className="col-12 col-lg-9">
               <section
                 name="thoughtText"
-                placeholder="Here's a new thought..."
-                value={thoughtText}
                 className="form-input w-100"
-                style={{height: 'auto', resize: 'vertical' }}
-                onChange={handleChange}>
+                 style={{height: 'auto', resize: 'vertical' }}
+                 onChange={handleChange}>
                    <Inventory />
-              </section>
+                   <Wallet />
+             </section>
             </div>
 
             <div className="col-12 col-lg-3">
