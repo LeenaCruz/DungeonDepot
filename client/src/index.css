@@ -489,20 +489,21 @@ a:hover {
 }
 
 .cart-pos {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* background-color: #526c4e; */
-  color: black;
+  background-color: #526c4e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  /* width: 100%; */
 }
 
 .item-sep {
   background-color: #526c4e;
   color: white;
   width: 400px;
-  /* margin-top: 50px; */
   margin: 5px;
-
-
 }
 
 .div-box {
@@ -524,7 +525,7 @@ a:hover {
   width: 400px;
   display: flex;
   justify-content: flex-end;
-  border: 1px solid #526c4e;
+  /* border: 1px solid #526c4e; */
   margin: 35px;
 }
 
