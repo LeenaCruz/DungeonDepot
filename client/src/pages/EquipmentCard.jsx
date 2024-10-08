@@ -8,7 +8,8 @@ export default function EquipmentCard({ equipment }) {
           </h5>
         </hgroup>
         <div className="stats">
-          <p> cost: {equipment.cost.quantity} {equipment.cost.unit}
+          <p> Description: {equipment.desc} </p>
+          <p> Cost: {equipment.cost.quantity} {equipment.cost.unit}
           </p>
      
         </div>
