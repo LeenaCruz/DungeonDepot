@@ -11,3 +11,9 @@ export async function getAllEquipment() {
   );
 }
 
+export async function getEquipmentCategories() {
+  const categories = await fetch(BASE_URL + "/api/equipment-categories").then((response) =>
+    response.json()
+  );
+  return categories.results;
+}

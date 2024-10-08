@@ -32,12 +32,12 @@ const homePage = () => {
   //   fetchItems();
   // }, []);
 
-  const handleSearch = (query) => { 
-    const filtered = items.filter((item) => 
-      item.name.toLowerCase().includes(query.toLowerCase())
-  );
-  setFilteredItems(filtered);
-  }
+  // const handleSearch = (query) => { 
+  //   const filtered = items.filter((item) => 
+  //     item.name.toLowerCase().includes(query.toLowerCase())
+  // );
+  // setFilteredItems(filtered);
+  // }
 
 
  
@@ -68,9 +68,6 @@ const homePage = () => {
   //     }
   //   }
   // }
-
- 
-
 
   return (
     // Users Dashboard
