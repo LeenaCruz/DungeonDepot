@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Wallet from '../components/GamingWallet';
 // import { Navigate, useParams } from 'react-router-dom';
-// import { useQuery } from '@apollo/client';
-
-// import BeginForm from '../components/LandingPageForm';
-// import ThoughtList from '../components/ThoughtList';
 
 //SEARCH BAR 
 import SearchBar from '../components/SearchBar';
-import { getAllItems } from '../api';
-
+import { getAllEquipment } from '../api';
 
 import { QUERY_ME } from '../utils/queries'
 import AuthService from '../utils/auth';
-// We didnt have bootstrap installed
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useQuery } from '@apollo/client';
 
@@ -28,7 +21,7 @@ const homePage = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const data = await getAllItems();
+        const data = await getAllEquipment();
         setItems(data);
         setFilteredItems(data);
       } catch (error) {
@@ -169,19 +162,13 @@ const homePage = () => {
     {filteredItems.map((item) => (
       <li key={item.id}>
         {item.name}
-        <button className='item-button'>
-          Add
+        <button className='item-button'>Add
           </button></li>
     ))}
   </ul>
 </div>
 
-
                     <button>Create Shop</button>
-                    {/* <p>Create by Category</p>
-                    <p>Select Category</p>
-             <option value='all'> All items</option>
-                    <button>Random Generate</button> */}
                   </div>
                 </div>
                 <div className=" col-md-6 col-sm-12">
@@ -207,9 +194,7 @@ const homePage = () => {
                     </div>
                     <p>If 0 shops then:</p>
                     <div> You have no shops created. </div>
-                    {/* <div> Item List Component?</div>
-                    <button>Checkout</button> */}
-
+              
                   </div>
                 </div>
               </div>
