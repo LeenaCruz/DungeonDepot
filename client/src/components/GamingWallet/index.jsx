@@ -10,7 +10,7 @@ const Wallet = () => {
         Gaming Wallet
       </header>
       <div className="wallet-bal">
-        Balance: 
+        Balance: 100GP
       </div>
       </div>
     )  

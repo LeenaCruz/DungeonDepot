@@ -11,6 +11,7 @@ import { getAllEquipment } from "../../api";
 import Auth from '../../utils/auth';
 import Login from '../../pages/Login';
 import Wallet from '../GamingWallet';
+import Cart from '../Cart'
 
 const LandingPage = () => {
   // const [thoughtText, setThoughtText] = useState('');
@@ -93,6 +94,7 @@ const [thoughtText,setThoughtText] = useState(0);
                  style={{height: 'auto', resize: 'vertical' }}
                  onChange={handleChange}>
                    <Inventory />
+                   <Cart />
                    <Wallet />
              </section>
             </div>
