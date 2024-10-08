@@ -1,10 +1,14 @@
-import  React, {useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Wallet from '../components/GamingWallet';
 // import { Navigate, useParams } from 'react-router-dom';
 // import { useQuery } from '@apollo/client';
 
 // import BeginForm from '../components/LandingPageForm';
 // import ThoughtList from '../components/ThoughtList';
+
+//SEARCH BAR 
+import SearchBar from '../components/SearchBar';
+import { getAllItems } from '../api';
 
 
 import { QUERY_ME } from '../utils/queries'
@@ -14,11 +18,35 @@ import AuthService from '../utils/auth';
 
 import { useQuery } from '@apollo/client';
 
-
 const homePage = () => {
-
-
   const { loading, error, data } = useQuery(QUERY_ME);
+ //SEARCH BAR
+  // const [shopName, setShopName] = useState('');
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  //Fetch items from API
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const data = await getAllItems();
+        setItems(data);
+        setFilteredItems(data);
+      } catch (error) {
+        console.log('Error fetching items:', error)
+      }
+    };
+    fetchItems();
+  }, []);
+
+  const handleSearch = (query) => { 
+    const filtered = items.filter((item) => 
+      item.name.toLowerCase().includes(query.toLowerCase())
+  );
+  setFilteredItems(filtered);
+  }
+
+
+ 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>
 
@@ -46,6 +74,8 @@ const homePage = () => {
   //     }
   //   }
   // }
+
+ 
 
 
   return (
@@ -121,11 +151,8 @@ const homePage = () => {
                       placeholder='What is your shop name?'
                     />
 
-                    <p> Search for items </p>
-                    <input
-                      placeholder='SEARCH BAR COMPONENT'
-                    />
-                    
+                    <SearchBar onSearch={handleSearch} />
+
                     <p>Results:</p>
                     <div className='item-row'>
                       <p className='item-name'>Item Name</p>
@@ -136,7 +163,21 @@ const homePage = () => {
                       <button className='item-button'>Add</button>
                     </div>
 
-<button>Create Shop</button>
+<div className='shop-preview'>
+  <h2>Shop Name</h2>
+  <ul>
+    {filteredItems.map((item) => (
+      <li key={item.id}>
+        {item.name}
+        <button className='item-button'>
+          Add
+          </button></li>
+    ))}
+  </ul>
+</div>
+
+
+                    <button>Create Shop</button>
                     {/* <p>Create by Category</p>
                     <p>Select Category</p>
              <option value='all'> All items</option>
@@ -145,12 +186,13 @@ const homePage = () => {
                 </div>
                 <div className=" col-md-6 col-sm-12">
                   <div className="contentBox">
-                    <div> Current Shop </div>
-                   <div className='item-row'>
-                    <p className='item-name'>Added Item's Name Here</p>
-                    <p className='item-name'>QTY</p>
-                    <p className='item-name'>Cost</p>
-                    <button className='item-button'>Edit</button>
+                    <h4> Current Shop </h4>
+                    <p>Items Cards ?</p>
+                    <div className='item-row'>
+                      <p className='item-name'>Added Item's Name Here</p>
+                      <p className='item-name'>QTY</p>
+                      <p className='item-name'>Cost</p>
+                      <button className='item-button'>Edit</button>
                     </div>
                   </div>
                 </div>
@@ -158,13 +200,13 @@ const homePage = () => {
                   <div className="sideBox">
                     <h4>GM SHOPS</h4>
                     <p>If GM has shops, they should show here.</p>
-                    <div> 
+                    <div>
                       <div>Shop CARD</div>
                       <button>Edit</button>
                       <button>Delete</button>
                     </div>
-            <p>If 0 shops then:</p>
-            <div> You have no shops created. </div>
+                    <p>If 0 shops then:</p>
+                    <div> You have no shops created. </div>
                     {/* <div> Item List Component?</div>
                     <button>Checkout</button> */}
 
@@ -199,63 +241,5 @@ const homePage = () => {
   );
 }
 
-// const Profile = () => {
-//   const { username: userParam } = useParams();
-
-//   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-//     variables: { username: userParam },
-//   });
-
-//   const user = data?.me || data?.user || {};
-//   if (
-//     Auth.loggedIn() && 
-//     /* Run the getProfile() method to get access to the unencrypted token value in order to retrieve the user's username, and compare it to the userParam variable */
-//     Auth.getProfile().authenticatedPerson.username === userParam
-//   ) {
-//     return <Navigate to="/me" />;
-//   }
-
-//   if (loading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   if (!user?.username) {
-//     return (
-//       <h4>
-//         You need to be logged in to see this. Use the navigation links above to
-//         sign up or log in!
-//       </h4>
-//     );
-//   }
-
-//   return (
-//     <div>
-//       <div className="flex-row justify-center mb-3">
-//         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-//           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
-//         </h2>
-
-//         <div className="col-12 col-md-10 mb-5">
-//           <ThoughtList
-//             thoughts={user.thoughts}
-//             title={`${user.username}'s thoughts...`}
-//             showTitle={false}
-//             showUsername={false}
-//           />
-//         </div>
-//         {!userParam && (
-//           <div
-//             className="col-12 col-md-10 mb-3 p-3"
-//             style={{ border: '1px dotted #1a1a1a' }}
-//           >
-//             <BeginForm />
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
 
 export default homePage;
