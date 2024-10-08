@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Item from './pages/Item'
 import Error from './pages/Error';
+import CheckoutPage from './components/CheckoutPage/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,13 +27,19 @@ const router = createBrowserRouter([
       }, {
         path: '/signup',
         element: <Signup />
-      }, {
+      }, 
+      {
         path: '/me',
         element: <Dashboard />
-      }, {
+      },
+       {
         path: '/profiles/:username',
         element: <Dashboard />
       }, 
+      {
+        path: '/checkout',
+        element: <CheckoutPage />
+      },
       { path: '/item',
         element: <Item />
       },

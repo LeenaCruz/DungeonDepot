@@ -498,7 +498,9 @@ a:hover {
   border-radius: 10px;
   /* width: 100%; */
   position: relative;
+  border: 3px solid black;
   left: 45%;
+
 }
 
 .cart-text {
@@ -510,6 +512,8 @@ a:hover {
   color: white;
   width: 400px;
   margin: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 .div-box {

@@ -93,7 +93,7 @@ const homePage = () => {
                   <div> Wallet:</div>
                   {data?.me?.username ?? 'N/A'}
                   <p>${data?.me?.wallet ?? 'N/A'}</p>
-                  <Wallet />
+                  {/* <Wallet /> */}
                 </div>
               </div>
               <div className=" col-md-6 col-sm-12">

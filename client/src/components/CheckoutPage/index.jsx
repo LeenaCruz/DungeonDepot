@@ -3,7 +3,7 @@ import Header from "../Header";
 
 const CheckoutPage = () => {
     <> 
-    <Link className="btn btn-lg btn-info m-2" to="/checkout"></Link>
+    {/* <Link className="btn btn-lg btn-info m-2" to="/checkout"></Link> */}
     <Header /> 
     <div className="checkout-page">
 

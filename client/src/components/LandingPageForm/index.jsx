@@ -12,6 +12,7 @@ import Auth from '../../utils/auth';
 import Login from '../../pages/Login';
 import Wallet from '../GamingWallet';
 import Cart from '../Cart'
+import CheckoutPage from '../CheckoutPage';
 
 const LandingPage = () => {
   // const [thoughtText, setThoughtText] = useState('');
@@ -24,6 +25,8 @@ const LandingPage = () => {
 const [thoughtText,setThoughtText] = useState(0);
   // adds up and updates the total items in the gm's store
   const [totalAvailableItems, setTotalAvailableItems] = useState(0);
+
+// const error = null;
 
   const [addThought, { error }] = useMutation
   (ADD_THOUGHT, {
@@ -51,6 +54,10 @@ const [thoughtText,setThoughtText] = useState(0);
       console.error(err);
     }
   };
+
+  const handleClick = (event) => {
+    <Link to={CheckoutPage}> </Link>
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -92,7 +99,8 @@ const [thoughtText,setThoughtText] = useState(0);
                 name="thoughtText"
                 className="form-input w-100"
                  style={{height: 'auto', resize: 'vertical' }}
-                 onChange={handleChange}>
+                 onChange={handleChange}
+                 >
                    <Inventory />
                    <Cart />
                    <Wallet />
@@ -100,7 +108,7 @@ const [thoughtText,setThoughtText] = useState(0);
             </div>
 
             <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
+              <button className="btn btn-primary btn-block py-3 checkout-btn1" type="submit" onClick={() => handleClick(e)}>
                 Checkout
               </button>
             </div>
