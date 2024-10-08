@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Wallet from '../components/GamingWallet';
 import EquipmentList from '../components/EquipmentList';
+import CreateStoreForm from '../components/CreateStore';
 // import { Navigate, useParams } from 'react-router-dom';
 
 //SEARCH BAR 
@@ -118,8 +119,10 @@ const homePage = () => {
             <div className="container">
               <div className="row mb-3">
                 <div className="col-md-3 col-sm-12" >
-                  <div className="sideBox"> <h4> CREATE SHOP</h4>
-                    <p> Name </p>
+                  <div className="sideBox"> 
+                    <CreateStoreForm />
+                    {/* <h4> CREATE SHOP</h4> */}
+                    {/* <p> Name </p> */}
                     {/* <form onSubmit = {handleFormSubmit}>
                     <input 
                     placeholder='Store Name'
@@ -138,9 +141,9 @@ const homePage = () => {
                  </form> */}
 
                     {/* Layout Only */}
-                    <input
+                    {/* <input
                       placeholder='What is your shop name?'
-                    />
+                    /> */}
 
                     {/* <SearchBar onSearch={handleSearch} /> */}
                     <EquipmentList />

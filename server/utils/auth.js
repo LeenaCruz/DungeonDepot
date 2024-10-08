@@ -12,23 +12,26 @@ module.exports = {
   }),
   authMiddleware: function ({ req }) {
     let token = req.body.token || req.query.token || req.headers.authorization;
-
+console.log("Texting the headers:", req.headers)
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
     }
 
     if (!token) {
-      return req;
+      return req
+      // {user: null} 
     }
 
     try {
       const { authenticatedPerson } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = authenticatedPerson;
+      // return {user: authenticatedPerson};
     } catch {
       console.log('Invalid token');
+      // return {user: null};
+      return req
     }
 
-    return req;
   },
   signToken: function ({ email, username, _id }) {
     const payload = { email, username, _id };

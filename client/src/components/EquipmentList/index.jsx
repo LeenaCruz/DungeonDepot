@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { getAllEquipment } from '../../api';
+import { ADD_ITEM_TO_SHOP } from '../../utils/mutations';
 
 const EquipmentList = () => {
   const [equipment, setEquipment] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+
+const [addItemToShop] = useMutation(ADD_ITEM_TO_SHOP);
 
   useEffect(() => {
     const fetchEquipment = async () => {
@@ -32,13 +36,18 @@ const EquipmentList = () => {
   //   onSearch(searchTerm);
   // }
 
-const handleAddToStore = async (item) => { 
-  try {
-    await addItemToStore(item);
-    alert(`${item.name} added to the store!`)
-  } catch (error) {
-    alert(`Error adding this item.`)
-  }
+const handleAddToShop = async (item) => { 
+try {
+  await addItemToShop({
+    variables: {
+      storeId: storeId,
+      itemId: itemId,
+    }
+  });
+  alert('Item added to the shop!')
+} catch (error) {
+  alert('Error adding item.')
+}
 };
 
 
@@ -71,7 +80,7 @@ const handleAddToStore = async (item) => {
           <li key={item.index}>
             <p className='item-list'>{item.name}</p>
             <p>{item.equipment_category.name}</p>
-            <button onClick={() => handleAddToStore(item)}>Add</button>
+            <button onClick={() => handleAddToShop(item.index)}>Add</button>
           </li>
         ))}
       </ul>

@@ -55,4 +55,32 @@ export const ADD_COMMENT = gql`
   }
 `;
 
+export const ADD_ITEM_TO_SHOP = gql`
+mutation AddItemToShop($storeId: ID!, $itemId: ID!) {
+  addItemToShop(storeId: $storeId, itemId: $itemId) {
+    _id
+    name
+    items {
+      id
+      name
+    }
+  }
+}`;
+
+export const CREATE_STORE = gql`
+mutation CreateStore($name: String!, $description: String!){
+  createStore(name:$name, description: $description) {
+    _id
+    name
+    description
+    owner {
+      username
+    }
+    items {
+      name
+    }
+  }
+}`;
+
+
 
