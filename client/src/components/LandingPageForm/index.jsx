@@ -80,7 +80,7 @@ const [thoughtText,setThoughtText] = useState(0);
               // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            <h3> Inventory </h3>
+            <p> Inventory </p>
             Browse Inventory {totalAvailableItems} / {listLength}
           </p>
           <form

@@ -11,6 +11,19 @@ export async function getAllEquipment() {
   );
 }
 
+
+export async function getMagicItems() {
+  const magicItemsIndexes = await fetch(BASE_URL + "/api/magic-items/").then((response) =>
+    response.json()
+  );
+  return Promise.all(
+    magicItemsIndexes.results.map((index) =>
+      fetch(BASE_URL + index.url).then((response) => response.json())
+    )
+  );
+}
+
+
 export async function getEquipmentCategories() {
   const categories = await fetch(BASE_URL + "/api/equipment-categories").then((response) =>
     response.json()
