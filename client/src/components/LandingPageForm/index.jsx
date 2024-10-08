@@ -6,7 +6,7 @@ import kingDice from '../../assets/kingDice.png'
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
 import Inventory from '../InventoryList';
-import { getAllSpells } from "../../api";
+import { getAllEquipment } from "../../api";
 
 import Auth from '../../utils/auth';
 import Login from '../../pages/Login';
@@ -63,7 +63,7 @@ const [thoughtText,setThoughtText] = useState(0);
 
   // Not working 
   let listLength;
-    getAllSpells((sData) => {
+    getAllEquipment((sData) => {
       listLength = sData.length
       // return listLength
     })
