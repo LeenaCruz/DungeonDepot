@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Wallet = () => {
+const Wallet = (props) => {
 
     const [cash, setCash] = useState([]);
 

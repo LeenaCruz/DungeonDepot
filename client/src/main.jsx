@@ -10,7 +10,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Item from './pages/Item'
 import Error from './pages/Error';
-import CheckoutPage from './components/CheckoutPage/index.jsx';
+import Checkout from './pages/Checkout.jsx'
+// import CheckoutPage from './components/CheckoutPage/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
       }, 
       {
         path: '/checkout',
-        element: <CheckoutPage />
+        element: <Checkout />
       },
       { path: '/item',
         element: <Item />

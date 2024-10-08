@@ -108,9 +108,9 @@ const [thoughtText,setThoughtText] = useState(0);
             </div>
 
             <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3 checkout-btn1" type="submit" onClick={() => handleClick(e)}>
+              <Link className="btn btn-primary btn-block py-3 checkout-btn1" to={'/checkout'} type="submit">
                 Checkout
-              </button>
+              </Link>
             </div>
             {error && (
               <div className="col-12 my-3 bg-danger text-white p-3">

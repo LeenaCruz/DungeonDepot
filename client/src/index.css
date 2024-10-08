@@ -514,11 +514,13 @@ a:hover {
   margin: 5px;
   display: flex;
   justify-content: center;
+  border-radius: 10px;
 }
 
 .div-box {
   background-color: white;
   margin: 5px;
+ 
 }
 
 .wallet-header {
