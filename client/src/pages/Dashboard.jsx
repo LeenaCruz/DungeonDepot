@@ -4,8 +4,8 @@ import EquipmentList from '../components/EquipmentList';
 // import { Navigate, useParams } from 'react-router-dom';
 
 //SEARCH BAR 
-import SearchBar from '../components/SearchBar';
-import { getAllEquipment } from '../api';
+// import SearchBar from '../components/SearchBar';
+// import { getAllEquipment } from '../api';
 
 import { QUERY_ME } from '../utils/queries'
 import AuthService from '../utils/auth';
@@ -16,21 +16,21 @@ const homePage = () => {
   const { loading, error, data } = useQuery(QUERY_ME);
  //SEARCH BAR
   // const [shopName, setShopName] = useState('');
-  const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([]);
-  //Fetch items from API
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const data = await getAllEquipment();
-        setItems(data);
-        setFilteredItems(data);
-      } catch (error) {
-        console.log('Error fetching items:', error)
-      }
-    };
-    fetchItems();
-  }, []);
+  // const [items, setItems] = useState([]);
+  // const [filteredItems, setFilteredItems] = useState([]);
+  // //Fetch items from API
+  // useEffect(() => {
+  //   const fetchItems = async () => {
+  //     try {
+  //       const data = await getAllEquipment();
+  //       setItems(data);
+  //       setFilteredItems(data);
+  //     } catch (error) {
+  //       console.log('Error fetching items:', error)
+  //     }
+  //   };
+  //   fetchItems();
+  // }, []);
 
   const handleSearch = (query) => { 
     const filtered = items.filter((item) => 
@@ -145,9 +145,10 @@ const homePage = () => {
                       placeholder='What is your shop name?'
                     />
 
-                    <SearchBar onSearch={handleSearch} />
+                    {/* <SearchBar onSearch={handleSearch} /> */}
+                    <EquipmentList />
 
-                    <p>Results:</p>
+                    {/* <p>Results:</p> */}
                     {/* <div className='item-row'>
                       <p className='item-name'>Item Name</p>
                       <button className='item-button'>Add</button>
@@ -157,7 +158,7 @@ const homePage = () => {
                       <button className='item-button'>Add</button>
                     </div> */}
 
-<div className='shop-preview'>
+{/* <div className='search-preview'>
   <ul className='item-list'>
     {filteredItems.map((item) => (
       <li key={item.id} className='item-name' >
@@ -166,7 +167,7 @@ const homePage = () => {
           </button></li>
     ))}
   </ul>
-</div>
+</div> */}
 
                     <button>Create Shop</button>
                   </div>

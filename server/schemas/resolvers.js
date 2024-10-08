@@ -1,4 +1,4 @@
-const { User, Item } = require('../models');
+const { User, Item, Store } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const axios = require('axios');
 
@@ -166,7 +166,17 @@ const resolvers = {
       }
       const token = signToken(user);
       return {token, user};
-    }
+    },
+    // addItemToStore2: async (_, {storeId, itemId}, {dataSources}) => {
+    //   try {
+    //     const store = await dataSources.Store.findById(storeId)
+    //     if(!store) {
+    //       throw new Error('Store not found');
+    //     }
+
+    
+    //   }
+    // }
   }
 };
 
