@@ -78,6 +78,14 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
+                <input
+                  className="form-input"
+                  placeholder="GM or Player"
+                  name="email"
+                  type="email"
+                  value={formState.email}
+                  onChange={handleChange}
+                />
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}

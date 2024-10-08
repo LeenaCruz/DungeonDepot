@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Wallet from '../components/GamingWallet';
+import EquipmentList from '../components/EquipmentList';
 // import { Navigate, useParams } from 'react-router-dom';
 
 //SEARCH BAR 
@@ -91,7 +92,7 @@ const homePage = () => {
               <div className=" col-md-6 col-sm-12">
                 <div className="contentBox">
                   <div> "Name of the GameMaster's" Shop</div>
-                  <div> Stores </div>
+                  <EquipmentList />
                 </div>
               </div>
               <div className="col-md-3 col-sm-12">
