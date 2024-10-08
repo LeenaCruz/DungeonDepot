@@ -486,18 +486,28 @@ a:hover {
   width: 300px;
   height: 100px;
   border-radius: 5px;
+}
+
+.cart-pos {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* background-color: #526c4e; */
+  color: black;
+}
+
+.item-sep {
+  background-color: #526c4e;
+  color: white;
+  width: 400px;
+  /* margin-top: 50px; */
+  margin: 5px;
 
 
+}
 
-  /* border: 1px solid black;
-  width: 300px;
-  height: 100px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  width: 100%;
-  align-items: center; */
+.div-box {
+  background-color: white;
+  margin: 5px;
 }
 
 .wallet-header {
@@ -508,6 +518,14 @@ a:hover {
   justify-content: center;
 
   /* width: 100% */
+}
+
+.shopping-cart {
+  width: 400px;
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid #526c4e;
+  margin: 35px;
 }
 
 .wallet-bal {
