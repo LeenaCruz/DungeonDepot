@@ -9,7 +9,7 @@ import EquipmentList from '../components/EquipmentList';
 
 //SEARCH BAR 
 import SearchBar from '../components/SearchBar';
-import { getAllItems } from '../api';
+import { getAllEquipment } from '../api';
 
 
 import { QUERY_ME } from '../utils/queries'
