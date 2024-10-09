@@ -87,8 +87,8 @@ const [thoughtText,setThoughtText] = useState(0);
               // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            <p> Inventory </p>
-            Browse Inventory {totalAvailableItems} / {listLength}
+            <strong style={{display: 'flex', justifyContent: 'center', color: 'black', fontSize: '40px'}}> Inventory List </strong>
+            {/* Browse Inventory {totalAvailableItems} / {listLength} */}
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"

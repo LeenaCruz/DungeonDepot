@@ -489,7 +489,8 @@ a:hover {
 }
 
 .cart-pos {
-  background-color: #526c4e;
+  /* background-color: #8d8f8d; */
+  background-color: #736F4E;
   color: white;
   display: flex;
   flex-direction: column;
@@ -498,33 +499,41 @@ a:hover {
   border-radius: 10px;
   /* width: 100%; */
   position: relative;
-  border: 3px solid black;
+  border: 2px solid black;
   left: 45%;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
 
 }
 
 .cart-text {
-  background-color: #526c4e;
+  /* background-color: #8d8f8d; */
+  background-color: #736F4E;
 }
 
 .item-sep {
-  background-color: #526c4e;
+  /* background-color: #8d8f8d; */
+  background-color: #736F4E;
   color: white;
   width: 400px;
   margin: 5px;
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .div-box {
-  background-color: white;
+  /* background-color: white; */
   margin: 5px;
  
 }
 
 .wallet-header {
-  background-color: #526c4e;
+  background-color: #736F4E;
+  /* background-color: #526c4e; */
   /* color: #d9e9e8; */
   color: #ffffff;
   display: flex;
@@ -1531,6 +1540,12 @@ label form [type='radio'] {
   vertical-align: middle;
 }
 
+.btn.btn-primary.checkout-btn1 {
+ color: white;
+ border: 1px black solid;
+ text-decoration: none;
+}
+
 /* col-sm */
 @media screen and (min-width: 640px) {
   .col-sm-auto {
@@ -1959,7 +1974,8 @@ label form [type='radio'] {
   
   }
   .ATC-btn-pos:hover {
-    background-color: #B4C292;
+    background-color: #736F4E;
+    color: white;
   }
 
   .atc-div {
@@ -1989,4 +2005,12 @@ label form [type='radio'] {
     flex-direction: column;
     justify-content: center;
   }
+}
+
+.equipment-card {
+  text-decoration: none;
+}
+
+.inv-card-header {
+  text-decoration: none;
 }
