@@ -41,13 +41,14 @@ const [thoughtText,setThoughtText] = useState(0);
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await addThought({
-        variables: {
-          thoughtText,
-          // Run the getProfile() method to get access to the unencrypted token value in order to retrieve the user's username 
-          thoughtAuthor: Auth.getProfile().authenticatedPerson.username
-        },
-      });
+      console.log("Hi")
+      // const { data } = await addThought({
+      //   variables: {
+      //     thoughtText,
+      //     // Run the getProfile() method to get access to the unencrypted token value in order to retrieve the user's username 
+      //     thoughtAuthor: Auth.getProfile().authenticatedPerson.username
+      //   },
+      // });
 
       setThoughtText('');
     } catch (err) {
