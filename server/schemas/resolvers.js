@@ -217,9 +217,9 @@ console.log(user);
       return {token, user};
     }
 
-    addToCart: async (parent, args) => {
-      const cart = await 
-    }
+    // addToCart: async (parent, args) => {
+    //   const cart = await 
+    // }
   }
 };
 
