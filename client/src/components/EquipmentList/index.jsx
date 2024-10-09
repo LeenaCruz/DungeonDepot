@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { getAllEquipment, getMagicItems, getEquipmentCategories } from '../../api';
 import { ADD_ITEM_TO_SHOP } from '../../utils/mutations';
 
-const EquipmentList = () => {
+const EquipmentList = ({storeId}) => {
   const [equipment, setEquipment] = useState([]);
   const [magicItems, setMagicItems] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -16,6 +16,7 @@ const EquipmentList = () => {
 
 const [addItemToShop] = useMutation(ADD_ITEM_TO_SHOP);
 
+console.log("Checking storeId pass:", storeId)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,20 +48,37 @@ const [addItemToShop] = useMutation(ADD_ITEM_TO_SHOP);
   //   onSearch(searchTerm);
   // }
 
-const handleAddToShop = async (item) => { 
-try {
-  await addItemToShop({
-    variables: {
-      storeId: storeId,
-      itemId: itemId,
-    }
-  });
-  alert('Item added to the shop!')
-} catch (error) {
-  alert('Error adding item.')
+// const handleAddToShop = async (item) => { 
+// try {
+//   await addItemToShop({
+//     variables: {
+//       storeId: storeId,
+//       itemId: itemId,
+//     }
+//   });
+//   alert('Item added to the shop!')
+// } catch (error) {
+//   alert('Error adding item.')
+// }
+// };
+const handleAddToShop = async (itemId) => {
+  console.log('Add button HandleAddtoshop, storeId:', storeId)
+  if (!storeId) {
+    console.error('No store created yet');
+    return;
+  } 
+  try {
+    const {data} = await addItemToShop({
+      variables: {
+        storeId: storeId,
+        itemId: itemId,
+      },
+    });
+    console.log('Item added to the shop:',data)
+  } catch (err) {
+    console.error('Error adding item to the shop:', err)
+  }
 }
-};
-
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);

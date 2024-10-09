@@ -73,7 +73,7 @@ mutation AddItemToShop($storeId: ID!, $itemId: ID!) {
     _id
     name
     items {
-      id
+      _id
       name
     }
   }
@@ -87,9 +87,6 @@ mutation CreateStore($name: String!, $description: String!){
     description
     owner {
       username
-    }
-    items {
-      name
     }
   }
 }`;

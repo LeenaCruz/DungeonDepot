@@ -11,7 +11,7 @@ const typeDefs = `
   }
 
   type Store {
-    _id: ID
+    _id: ID!
     name: String
     description: String
     owner: User
@@ -20,7 +20,7 @@ const typeDefs = `
   }
 
   type Item {
-    _id: ID
+    _id: ID!
     name: String
     description: String
     cost: Int
