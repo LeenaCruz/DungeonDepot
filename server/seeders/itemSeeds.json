@@ -1,6 +1,7 @@
-{
+[
+  {
     "name": "Why The Lucky Stiff",
-    "description": "wtls@techfriends.dev",
+    "description": "testy test",
     "cost": "12",
     "category": "adventuring gear"
   },
@@ -17,4 +18,5 @@
     "description": "testy test",
     "cost": "12",
     "category": "adventuring gear"
-  },
+  }
+]
