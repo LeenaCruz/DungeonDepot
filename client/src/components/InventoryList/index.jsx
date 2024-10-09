@@ -14,8 +14,13 @@ const Inventory = () => {
     const {cart, setCart} = useCartContext();
 
     const handleClick = (item) => {
-        console.log(item)
-        setCart(c => [...c, item])
+        const updatedItem = {
+            name: item.name,
+            description: item.desc[0] || 'item',
+            cost: item.cost.quantity,
+            category: item.equipment_category.name
+        }
+        setCart(c => [...c, updatedItem])
     }
     useEffect(() => {
         console.log(cart)

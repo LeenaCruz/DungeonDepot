@@ -12,7 +12,6 @@ import Auth from '../../utils/auth';
 import Login from '../../pages/Login';
 import Wallet from '../GamingWallet';
 import Cart from '../Cart'
-import CheckoutPage from '../CheckoutPage';
 
 const LandingPage = () => {
   // const [thoughtText, setThoughtText] = useState('');
@@ -56,9 +55,6 @@ const [thoughtText,setThoughtText] = useState(0);
     }
   };
 
-  const handleClick = (event) => {
-    <Link to={CheckoutPage}> </Link>
-  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
