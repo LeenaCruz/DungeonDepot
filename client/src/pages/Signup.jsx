@@ -81,9 +81,9 @@ const Signup = () => {
                 <input
                   className="form-input"
                   placeholder="GM or Player"
-                  name="email"
-                  type="email"
-                  value={formState.email}
+                  name="role"
+                  type="text"
+                  value={formState.role}
                   onChange={handleChange}
                 />
                 <button
