@@ -74,12 +74,13 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'inventory.item',
-          populate: 'item'
-        });
+        const user = await User.findById(context.user._id)
+        // .populate({
+          // path: 'inventory.item',
+          // populate: 'item'
+        // });
         // user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
+console.log(user);
         return user;
       }
       throw AuthenticationError;
