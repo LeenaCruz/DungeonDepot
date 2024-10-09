@@ -15,7 +15,7 @@ const itemSchema = new Schema({
         type: Number,
         required: true, // cost of the item in gold
     },
-    Category: { // ??? would this me type or category ???
+    category: { // ??? would this me type or category ???
         type: String,
         required: true, // type of item 'weapon', 'armor', 'potion'
     },
@@ -25,7 +25,6 @@ const itemSchema = new Schema({
     store: {
         type: Schema.Types.ObjectId,
         ref: 'Store', // Reference to the store where the item is sold
-        required: true,
     },
 })
 

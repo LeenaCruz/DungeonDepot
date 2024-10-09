@@ -44,11 +44,7 @@ const router = createBrowserRouter([
       { path: '/item',
         element: <Item />
       },
-      //Erase later
-      // {
-      //   path: '/thoughts/:thoughtId',
-      //   element: <SingleThought />
-      // }
+   
     ]
   }
 ])

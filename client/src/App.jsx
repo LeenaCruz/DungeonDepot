@@ -12,7 +12,7 @@ import React, {useState} from 'react'
 import { CartProvider } from './utils/context';
 
 // import AuthService from './utils/auth'
-// const axios = require('axios');
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
