@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import kingDice from '../../assets/kingDice.png'
 
 import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
+import { QUERY_ME } from '../../utils/queries';
 import Inventory from '../InventoryList';
 import { getAllEquipment } from "../../api";
 
@@ -30,7 +30,7 @@ const [thoughtText,setThoughtText] = useState(0);
   const [addThought, { error }] = useMutation
   (ADD_THOUGHT, {
     refetchQueries: [
-      QUERY_THOUGHTS,
+      // QUERY_THOUGHTS,
       'getThoughts',
       QUERY_ME,
       'me'
