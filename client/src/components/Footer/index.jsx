@@ -14,7 +14,7 @@ const Footer = () => {
             &larr; Go Back
           </button>
         )} */}
-        <h5>
+        <h5 className='footer-style'>
           Made by Julianah, Leena, Charles and Kelsey.
         </h5>
       </div>

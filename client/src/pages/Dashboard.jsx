@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Wallet from '../components/GamingWallet';
 import EquipmentList from '../components/EquipmentList';
 import CreateStoreForm from '../components/CreateStore';
+import { PURCHASE_ITEMS } from "../utils/mutations";
+import { QUERY_USER } from "../utils/queries";
+import { useMutation } from "@apollo/client";
 // import { Navigate, useParams } from 'react-router-dom';
 
 //SEARCH BAR 
@@ -12,9 +15,12 @@ import { QUERY_ME } from '../utils/queries'
 import AuthService from '../utils/auth';
 
 import { useQuery } from '@apollo/client';
+import { useCartContext } from '../utils/context';
 
 const homePage = () => {
+  // const {data, loading} = useQuery(QUERY_ME)
   const { loading, error, data } = useQuery(QUERY_ME);
+  const user = data?.me || {}
  //SEARCH BAR
   // const [shopName, setShopName] = useState('');
   // const [items, setItems] = useState([]);
@@ -69,7 +75,15 @@ const homePage = () => {
   //   }
   // }
 
+  
+  const {cart, setCart} = useCartContext();
+// error in {}
+//   const [purchaseItems, {}] = useMutation(PURCHASE_ITEMS, {
+//     refetchQueries: [QUERY_ME]
+// })
+
   return (
+    
     // Users Dashboard
     <div>
 
@@ -79,10 +93,19 @@ const homePage = () => {
           <div className="container">
             <div className="row mb-3">
               <div className="col-md-3 col-sm-12" >
-                <div className="sideBox"> <h4> User Inventory or Create Shop</h4>
-                  <div> Wallet:</div>
-                  {data?.me?.username ?? 'N/A'}
-                  <p>${data?.me?.wallet ?? 'N/A'}</p>
+                <div className="sideBox"> <h4> {data?.me?.username ?? 'N/A'}'s Inventory </h4>
+                  <div> Wallet: {user.wallet} GP </div>
+                  {/* how to render the inventory - doesn't accept object */}
+                  <div> Inventory: 
+                    {/* {...cart} */}
+                  {cart.map((item, index) => (<div className='item-sep'>{item.name}</div>))}
+                    {/* {user.inventory.forEach(element => {
+                    element.name
+                  })}  */}
+                  </div> 
+
+                  {/* cart.length === 0 ? (<div className='cart-text'>Empty</div>) : */}
+                  {/* <p>${data?.me?.wallet ?? 'N/A'}</p> */}
                   {/* <Wallet /> */}
                 </div>
               </div>
@@ -168,7 +191,6 @@ const homePage = () => {
   </ul>
 </div> */}
 
-                    <button>Create Shop</button>
                   </div>
                 </div>
                 <div className=" col-md-6 col-sm-12">

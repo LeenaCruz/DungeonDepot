@@ -41,19 +41,7 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Store', // Stores owned by GMs
     },
-  ],
-  cart: [
-    {
-      item: {
-        type: Schema.Types.ObjectId,
-        ref: 'Item', // Item in the player's cart
-      },
-      quantity: {
-        type: Number,
-        default: 1, // Quantity of the item in the cart
-      },
-    },
-  ],
+  ]
 });
 
 userSchema.pre('save', async function (next) {

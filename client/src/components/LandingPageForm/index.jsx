@@ -12,7 +12,6 @@ import Auth from '../../utils/auth';
 import Login from '../../pages/Login';
 import Wallet from '../GamingWallet';
 import Cart from '../Cart'
-import CheckoutPage from '../CheckoutPage';
 
 const LandingPage = () => {
   // const [thoughtText, setThoughtText] = useState('');
@@ -56,9 +55,6 @@ const [thoughtText,setThoughtText] = useState(0);
     }
   };
 
-  const handleClick = (event) => {
-    <Link to={CheckoutPage}> </Link>
-  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -88,7 +84,7 @@ const [thoughtText,setThoughtText] = useState(0);
               // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            <strong style={{display: 'flex', justifyContent: 'center', color: 'black', fontSize: '40px'}}> Inventory List </strong>
+            <strong style={{display: 'flex', justifyContent: 'center', color: '#4C061D', fontSize: '40px'}}> Inventory List </strong>
             {/* Browse Inventory {totalAvailableItems} / {listLength} */}
           </p>
           <form

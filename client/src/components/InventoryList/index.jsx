@@ -14,8 +14,13 @@ const Inventory = () => {
     const {cart, setCart} = useCartContext();
 
     const handleClick = (item) => {
-        console.log(item)
-        setCart(c => [...c, item])
+        const updatedItem = {
+            name: item.name,
+            description: item.desc[0] || 'item',
+            cost: item.cost.quantity,
+            category: item.equipment_category.name
+        }
+        setCart(c => [...c, updatedItem])
     }
     useEffect(() => {
         console.log(cart)
@@ -25,7 +30,7 @@ const Inventory = () => {
         <ul className="equipment-list">
         {equipment.map((e) => (
             <div className='atc-div' key={e.index}>
-            <EquipmentCard  equipment={e} />
+            <EquipmentCard equipment={e} />
             <button className="ATC-btn-pos" onClick={() => handleClick(e)}>Add to Cart</button>
             </div>
             ))}

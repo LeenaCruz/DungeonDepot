@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useCartContext } from '../../utils/context';
 
-const CartItemsComponent = () => {
+const CartItemsComponent = (props) => {
     const {cart, setCart} = useCartContext();
   return (
     <div className='div-box'>

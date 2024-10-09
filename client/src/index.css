@@ -386,12 +386,13 @@ h6 {
   font-family: 'JetBrains Mono', monospace;
   margin: 0 0 0.5rem;
   line-height: 1.25;
-  color:#000000
+  color:#000000;
   
 }
 
 h1 {
   font-size: 2.25rem;
+  color: white;
 }
 
 h2 {
@@ -418,7 +419,9 @@ p {
   font-size: 1.1rem;
   margin: 0 0 1rem;
   line-height: 1.5;
-  color:#000000
+  color: #4C061D
+  /* color:#000000 */
+
 }
 
 ul,
@@ -490,7 +493,8 @@ a:hover {
 
 .cart-pos {
   /* background-color: #8d8f8d; */
-  background-color: #736F4E;
+  /* background-color: #736F4E; */
+  background-color: #4C061D;
   color: white;
   display: flex;
   flex-direction: column;
@@ -499,7 +503,29 @@ a:hover {
   border-radius: 10px;
   /* width: 100%; */
   position: relative;
-  border: 2px solid black;
+  /* border: 2px solid black; */
+  border: 3px solid #D6A143;
+  left: 45%;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+
+
+  /* background-color: #8d8f8d; */
+  /* background-color: #736F4E; */
+  background-color: #4C061D;
+  color: white;
+  /* color: #4C061D; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  /* width: 100%; */
+  position: relative;
+  border: 3px solid black;
+  /* border: 3px solid #D6A143; */
   left: 45%;
   padding-top: 15px;
   padding-left: 10px;
@@ -510,12 +536,17 @@ a:hover {
 
 .cart-text {
   /* background-color: #8d8f8d; */
-  background-color: #736F4E;
+  /* background-color: #736F4E; */
+  background-color: #4C061D;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .item-sep {
   /* background-color: #8d8f8d; */
-  background-color: #736F4E;
+  /* background-color: #736F4E; */
+  background-color: #4C061D;
   color: white;
   width: 400px;
   margin: 5px;
@@ -526,20 +557,55 @@ a:hover {
 }
 
 .div-box {
-  /* background-color: white; */
   margin: 5px;
+  display: flex;
+  /* width: 100%; */
+  padding: 10px;
+  flex-direction: column;
+  align-items: center;
+  border: 2px dotted #4C061D;
+  border-width: 5px;
  
 }
 
+.tHeader {
+  color: black;
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+
+}
+
+.purchase-btn {
+  display: flex;
+  justify-content: center;
+  background-color: #4C061D;
+  color: white;
+  width: 200px;
+  position: relative;
+  left: 42%;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
 .wallet-header {
-  background-color: #736F4E;
+  /* background-color: #736F4E; */
+  /* background-color: #D6A143; */
   /* background-color: #526c4e; */
+  background-color: #4C061D;
+  height: 27px;
   /* color: #d9e9e8; */
   color: #ffffff;
   display: flex;
   justify-content: center;
 
   /* width: 100% */
+}
+
+
+
+.footer-style {
+   color: white;
 }
 
 .shopping-cart {
@@ -552,7 +618,8 @@ a:hover {
 
 .wallet-bal {
   font-weight: bold;
-  color: rgb(89, 89, 89);
+  /* color: rgb(89, 89, 89); */
+  color: #4C061D;
   margin-top: 15px;
   margin-left: 5px;
   display: flex;
@@ -1140,7 +1207,8 @@ a:hover {
 }
 
 .btn.btn-primary {
-  background-color: #736F4E;
+  /* background-color: #736F4E; */
+  background-color: #4C061D;
   color: #d9e9e8;
 }
 
@@ -1997,6 +2065,11 @@ font-weight: bold;
     /* border: ; */
   }
 
+  .checkout-page {
+    display: flex;
+    flex-direction: column;
+  }
+
   .message-pos {
     display: flex;
     justify-content: center;
@@ -2019,8 +2092,17 @@ font-weight: bold;
 
 .equipment-card {
   text-decoration: none;
+  list-style: none;
+}
+
+.tool-text {
+  color: #4C061D;
 }
 
 .inv-card-header {
   text-decoration: none;
+  color: #4C061D;
 }
+
+
+/* background-color: #9b9b9b */

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { useQuery } from '@apollo/client'
+import { QUERY_ME } from "../../utils/queries";
 
 const Wallet = (props) => {
-
-    const [cash, setCash] = useState([]);
-
+const {data, loading} = useQuery(QUERY_ME)
+const user = data?.me || {}
     return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <div className="wallet-div">
@@ -11,7 +12,7 @@ const Wallet = (props) => {
         Gaming Wallet
       </header>
       <div className="wallet-bal">
-        Balance: 100GP
+        Balance: {user.wallet}
       </div>
       </div>
       </div>
