@@ -214,12 +214,6 @@ console.log(user);
       // });
       // return store;
     },
-      return {token, user};
-    }
-
-    // addToCart: async (parent, args) => {
-    //   const cart = await 
-    // }
   }
 };
 
