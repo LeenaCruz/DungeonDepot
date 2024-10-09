@@ -11,6 +11,8 @@ import { getAllEquipment } from "../../api";
 import Auth from '../../utils/auth';
 import Login from '../../pages/Login';
 import Wallet from '../GamingWallet';
+import Cart from '../Cart'
+import CheckoutPage from '../CheckoutPage';
 
 const LandingPage = () => {
   // const [thoughtText, setThoughtText] = useState('');
@@ -23,6 +25,8 @@ const LandingPage = () => {
 const [thoughtText,setThoughtText] = useState(0);
   // adds up and updates the total items in the gm's store
   const [totalAvailableItems, setTotalAvailableItems] = useState(0);
+
+// const error = null;
 
   const [addThought, { error }] = useMutation
   (ADD_THOUGHT, {
@@ -50,6 +54,10 @@ const [thoughtText,setThoughtText] = useState(0);
       console.error(err);
     }
   };
+
+  const handleClick = (event) => {
+    <Link to={CheckoutPage}> </Link>
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -79,8 +87,8 @@ const [thoughtText,setThoughtText] = useState(0);
               // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            <h3> Inventory </h3>
-            Browse Inventory {totalAvailableItems} / {listLength}
+            <strong style={{display: 'flex', justifyContent: 'center', color: 'black', fontSize: '40px'}}> Inventory List </strong>
+            {/* Browse Inventory {totalAvailableItems} / {listLength} */}
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
@@ -91,16 +99,18 @@ const [thoughtText,setThoughtText] = useState(0);
                 name="thoughtText"
                 className="form-input w-100"
                  style={{height: 'auto', resize: 'vertical' }}
-                 onChange={handleChange}>
+                 onChange={handleChange}
+                 >
                    <Inventory />
+                   <Cart />
                    <Wallet />
              </section>
             </div>
 
             <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
+              <Link className="btn btn-primary btn-block py-3 checkout-btn1" to={'/checkout'} type="submit">
                 Checkout
-              </button>
+              </Link>
             </div>
             {error && (
               <div className="col-12 my-3 bg-danger text-white p-3">

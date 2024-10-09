@@ -5,13 +5,15 @@
 
 // import { QUERY_THOUGHTS } from '../utils/queries'`;
 import LandingPage from '../components/LandingPageForm';
+import { useCartContext } from '../utils/context';
+// import {useOutletContext} from 'react-router-dom'
 
 const Home = () => {
   // const { loading, data } = useQuery(QUERY_THOUGHTS);
   // const thoughts = data?.thoughts || [];
-
+const {cart, setCart} = useCartContext()
+// console.log('aaaaaaa', cartItems, setCartItems)
   return (
-
     <main>
       <div>
         <LandingPage />

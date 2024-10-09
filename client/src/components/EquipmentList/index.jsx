@@ -1,21 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useMutation } from '@apollo/client';
-import { getAllEquipment } from '../../api';
+import { getAllEquipment, getMagicItems, getEquipmentCategories } from '../../api';
 import { ADD_ITEM_TO_SHOP } from '../../utils/mutations';
 
 const EquipmentList = () => {
   const [equipment, setEquipment] = useState([]);
+  const [magicItems, setMagicItems] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [hasSearched, setHasSearched] = useState(false);
 
 const [addItemToShop] = useMutation(ADD_ITEM_TO_SHOP);
 
   useEffect(() => {
-    const fetchEquipment = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getAllEquipment();
-        setEquipment(data);
+        const [equipmentData, magicItemsData, categoriesData] = await Promise.all([
+          getAllEquipment(),
+          getMagicItems(),
+          getEquipmentCategories(),
+        ]);
+        setEquipment(equipmentData);
+        setMagicItems(magicItemsData);
+        setCategories(categoriesData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -23,7 +34,7 @@ const [addItemToShop] = useMutation(ADD_ITEM_TO_SHOP);
       }
     };
 
-    fetchEquipment();
+    fetchData();
   }, []);
 
   const handleSearchChange = (event) => {
@@ -51,9 +62,30 @@ try {
 };
 
 
-  const filteredEquipment = equipment.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+    console.log("Selected Category:", event.target.value);
+  };
+
+  const handleSearchClick = () => {
+    console.log("Current Equipment:", equipment);
+    const combinedResults = [...equipment, ...magicItems];
+    const filteredResults = combinedResults.filter(item => {
+      const matchesSearchTerm = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesCategory = selectedCategory 
+        ? item.equipment_category?.index === selectedCategory
+        : true;
+
+      return matchesSearchTerm && (matchesCategory || !item.equipment_category);
+    });
+    
+    console.log("Filtered Results:", filteredResults);
+    setResults(filteredResults);
+    setHasSearched(true);
+  };
+
+  // Memoization of filtered results can be done similarly as before
 
   if (loading) {
     return <div>Loading...</div>;
@@ -65,58 +97,44 @@ try {
 
   return (
     <div className='search-preview'>
-      <p>Equipment List</p>
+      <h1>Equipment and Magic Items List</h1>
+      
       <input
         type="text"
-        placeholder="Search equipment..."
+        placeholder="Search equipment and magic items..."
         value={searchTerm}
         onChange={handleSearchChange}
       />
-      {searchTerm ? ( 
-        <div>
-          <p>Results:</p>
-      <ul>
-        {filteredEquipment.map((item) => (
-          <li key={item.index}>
-            <p className='item-list'>{item.name}</p>
-            <p>{item.equipment_category.name}</p>
-            <button onClick={() => handleAddToShop(item.index)}>Add</button>
-          </li>
+
+      <select onChange={handleCategoryChange} value={selectedCategory}>
+        <option value="">Select Equipment Category</option>
+        {categories.map((category) => (
+          <option key={category.index} value={category.index}>
+            {category.name}
+          </option>
         ))}
-      </ul>
-      </div>
+      </select>
+
+      <button onClick={handleSearchClick} disabled={!selectedCategory && !searchTerm}>Search</button>
+
+      {!hasSearched ? (
+        <p>Please select a category and enter a search term to see results.</p>
       ) : (
-        <p>Start typing to search for items...</p>
+        <ul>
+          {results.length > 0 ? (
+            results.map((item) => (
+              <li key={item.index}>
+                <h2>{item.name}</h2>
+                <p>{item.desc || item.desc.join(', ')}</p>
+                <button onClick={() => handleAddToShop(item.index)}>Add</button>
+              </li>
+            ))
+          ) : (
+            <li>No results found.</li>
+          )}
+        </ul>
       )}
     </div>
-
-// With Search Button
-    // <div>
-    //   <form onSubmit={handleSubmit} className='search-bar'>
-    //     <label htmlFor='item-search'>Search for items:</label>
-    //     <input
-    //       type='text'
-    //       id='item-search'
-    //       value={searchTerm}
-    //       onChange={handleSearchChange}
-    //       placeholder='Search for items to add...'
-    //     />
-    //     <button type='submit'>Search</button>
-    //   </form>
-    //   <div className='search-preview'>
-    //     <ul>
-    //       {filteredEquipment.map((item) => (
-    //         <li key={item.index}>
-    //           <h2>{item.name}</h2>
-    //           <p>{item.equipment_category.name}</p>
-    //           <button className='item-button'>Add</button>
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </div>
-    // </div>
-
-
   );
 };
 
