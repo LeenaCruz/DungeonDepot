@@ -5,7 +5,7 @@
 
 // import { QUERY_THOUGHTS } from '../utils/queries'`;
 import LandingPage from '../components/LandingPageForm';
-import homePage from '../pages/Dashboard';
+// import homePage from '../pages/Dashboard';
 import { useCartContext } from '../utils/context';
 // import homePage from './Dashboard';
 // import {useOutletContext} from 'react-router-dom'
@@ -18,7 +18,8 @@ const {cart, setCart} = useCartContext()
   return (
     <main>
       <div>
-        <homePage />
+        <LandingPage />
+        {/* <homePage /> */}
       </div>
 
     </main>
