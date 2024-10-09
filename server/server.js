@@ -22,6 +22,11 @@ const startApolloServer = async () => {
   app.use(express.json());
 
   app.use('/graphql', expressMiddleware(server, {
+    // 
+    // context: async ({req})=> {
+    //   const {user} = authMiddleware({req});
+    //   return {user};
+    // }
     context: authMiddleware
   }));
 

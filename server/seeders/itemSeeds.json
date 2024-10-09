@@ -1,0 +1,20 @@
+{
+    "name": "Why The Lucky Stiff",
+    "description": "wtls@techfriends.dev",
+    "cost": "12",
+    "category": "adventuring gear"
+  },
+
+  {
+    "name": "fake",
+    "description": "test",
+    "cost": "12",
+    "category": "adventuring gear"
+  },
+
+  {
+    "name": "fake again",
+    "description": "testy test",
+    "cost": "12",
+    "category": "adventuring gear"
+  },

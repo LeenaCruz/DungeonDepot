@@ -24,6 +24,20 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_TO_CART = gql `
+  mutation Mutation($itemId: ID!, $quantity: Int!) {
+    addToCart(itemId: $itemId, quantity: $quantity) {
+      cart {
+        item {
+          name
+          _id
+          cost
+        }
+      }
+    }
+  }
+`
+
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!) {
     addThought(thoughtText: $thoughtText) {
@@ -54,5 +68,33 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const ADD_ITEM_TO_SHOP = gql`
+mutation AddItemToShop($storeId: ID!, $itemId: ID!) {
+  addItemToShop(storeId: $storeId, itemId: $itemId) {
+    _id
+    name
+    items {
+      id
+      name
+    }
+  }
+}`;
+
+export const CREATE_STORE = gql`
+mutation CreateStore($name: String!, $description: String!){
+  createStore(name:$name, description: $description) {
+    _id
+    name
+    description
+    owner {
+      username
+    }
+    items {
+      name
+    }
+  }
+}`;
+
 
 

@@ -8,9 +8,11 @@ import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import React, {useState} from 'react'
+import { CartProvider } from './utils/context';
 
 // import AuthService from './utils/auth'
-// const axios = require('axios');
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -41,9 +43,9 @@ const client = new ApolloClient({
 
 
 function App() {
-
   return (
     <ApolloProvider client={client}>
+      <CartProvider> 
       <div className="flex-column justify-flex-start min-100-vh">
         <Header />
         <div className="container">
@@ -51,8 +53,7 @@ function App() {
         </div>
         <Footer />
       </div>
-
-
+      </CartProvider>
     </ApolloProvider>
   );
 }

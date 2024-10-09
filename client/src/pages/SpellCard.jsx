@@ -1,4 +1,4 @@
-export default function SpellCard({ spell }) {
+export default function SpellCard({ spell, text }) {
     return (
       <li className="spell-card">
         <hgroup>
@@ -25,6 +25,9 @@ export default function SpellCard({ spell }) {
           <p>
             <strong>Duration: </strong>
             {spell.duration}
+          </p>
+          <p>
+            <strong>Cost: 5GP</strong>
           </p>
         </div>
       </li>

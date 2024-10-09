@@ -1,22 +1,32 @@
 import { useEffect, useState } from "react";
-import { getAllSpells } from "../../api";
-import SpellCard from "../../pages/spellCard";
+import { getAllEquipment } from "../../api";
+import EquipmentCard from "../../pages/EquipmentCard";
+import { useCartContext } from "../../utils/context";
 
 // api  
 const Inventory = () => {
 
-    const [spells, setSpells] = useState([]);
+    const [equipment, setEquipment] = useState([]);
     useEffect(() => {
-    getAllSpells().then(setSpells);
+    getAllEquipment().then(setEquipment);
     }, []);
 
+    const {cart, setCart} = useCartContext();
+
+    const handleClick = (item) => {
+        console.log(item)
+        setCart(c => [...c, item])
+    }
+    useEffect(() => {
+        console.log(cart)
+    }, [cart])
     return (
         <div className="inv-items-div">
-        <ul className="spell-list">
-        {spells.map((spell) => (
-            <div className='atc-div'>
-            <SpellCard key={spell.index} spell={spell} />
-            <button className='ATC-btn-pos'>Add To Cart</button>
+        <ul className="equipment-list">
+        {equipment.map((e) => (
+            <div className='atc-div' key={e.index}>
+            <EquipmentCard  equipment={e} />
+            <button className="ATC-btn-pos" onClick={() => handleClick(e)}>Add to Cart</button>
             </div>
             ))}
             </ul>

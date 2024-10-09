@@ -488,12 +488,66 @@ a:hover {
   border-radius: 5px;
 }
 
+.cart-pos {
+  /* background-color: #8d8f8d; */
+  background-color: #736F4E;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  /* width: 100%; */
+  position: relative;
+  border: 2px solid black;
+  left: 45%;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+
+}
+
+.cart-text {
+  /* background-color: #8d8f8d; */
+  background-color: #736F4E;
+}
+
+.item-sep {
+  /* background-color: #8d8f8d; */
+  background-color: #736F4E;
+  color: white;
+  width: 400px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.div-box {
+  /* background-color: white; */
+  margin: 5px;
+ 
+}
+
 .wallet-header {
-  background-color: #526c4e;
+  background-color: #736F4E;
+  /* background-color: #526c4e; */
   /* color: #d9e9e8; */
   color: #ffffff;
   display: flex;
   justify-content: center;
+
+  /* width: 100% */
+}
+
+.shopping-cart {
+  width: 400px;
+  display: flex;
+  justify-content: flex-end;
+  /* border: 1px solid #526c4e; */
+  margin: 35px;
 }
 
 .wallet-bal {
@@ -501,6 +555,8 @@ a:hover {
   color: rgb(89, 89, 89);
   margin-top: 15px;
   margin-left: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -1476,12 +1532,28 @@ label form [type='radio'] {
 }
 
 .item-name {
+  text-decoration: none;
   margin: 0;
 }
 
 .item-button {
   padding: 5px 10px;
   vertical-align: middle;
+}
+
+.btn.btn-primary.checkout-btn1 {
+ color: white;
+ border: 1px black solid;
+ text-decoration: none;
+}
+
+.search-preview ul {
+  margin-left: 0px;
+  list-style-type: none;
+}
+.item-list {
+font-weight: bold;
+
 }
 
 /* col-sm */
@@ -1912,7 +1984,8 @@ label form [type='radio'] {
   
   }
   .ATC-btn-pos:hover {
-    background-color: #B4C292;
+    background-color: #736F4E;
+    color: white;
   }
 
   .atc-div {
@@ -1942,4 +2015,12 @@ label form [type='radio'] {
     flex-direction: column;
     justify-content: center;
   }
+}
+
+.equipment-card {
+  text-decoration: none;
+}
+
+.inv-card-header {
+  text-decoration: none;
 }

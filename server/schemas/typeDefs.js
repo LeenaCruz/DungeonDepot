@@ -16,7 +16,7 @@ const typeDefs = `
     description: String
     owner: User
     items: [Item]
-    transaction: [Transaction]
+    transactions: [Transaction]
   }
 
   type Item {
@@ -62,6 +62,7 @@ const typeDefs = `
     addToCart(itemId: ID!, quantity: Int!): User
     purchaseItems: User
     removeItemFromCart(itemId: ID!): User
+    addItemToShop(storeId: ID!, itemId: ID!): Store
   }
 `;
 

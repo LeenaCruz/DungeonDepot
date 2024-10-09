@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Item from './pages/Item'
 import Error from './pages/Error';
+import Checkout from './pages/Checkout.jsx'
+// import CheckoutPage from './components/CheckoutPage/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,21 +28,23 @@ const router = createBrowserRouter([
       }, {
         path: '/signup',
         element: <Signup />
-      }, {
+      }, 
+      {
         path: '/me',
         element: <Dashboard />
-      }, {
+      },
+       {
         path: '/profiles/:username',
         element: <Dashboard />
       }, 
+      {
+        path: '/checkout',
+        element: <Checkout />
+      },
       { path: '/item',
         element: <Item />
       },
-      //Erase later
-      // {
-      //   path: '/thoughts/:thoughtId',
-      //   element: <SingleThought />
-      // }
+   
     ]
   }
 ])

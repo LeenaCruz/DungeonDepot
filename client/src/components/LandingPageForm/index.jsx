@@ -6,9 +6,13 @@ import kingDice from '../../assets/kingDice.png'
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
 import Inventory from '../InventoryList';
-import { getAllSpells } from "../../api";
+import { getAllEquipment } from "../../api";
 
 import Auth from '../../utils/auth';
+import Login from '../../pages/Login';
+import Wallet from '../GamingWallet';
+import Cart from '../Cart'
+import CheckoutPage from '../CheckoutPage';
 
 const LandingPage = () => {
   // const [thoughtText, setThoughtText] = useState('');
@@ -17,9 +21,12 @@ const LandingPage = () => {
 
   // accumulates the items added to cart by the user 
   const [itemCount, setItemCount] = useState(0);
-
+  //Define thoughtText
+const [thoughtText,setThoughtText] = useState(0);
   // adds up and updates the total items in the gm's store
   const [totalAvailableItems, setTotalAvailableItems] = useState(0);
+
+// const error = null;
 
   const [addThought, { error }] = useMutation
   (ADD_THOUGHT, {
@@ -34,19 +41,24 @@ const LandingPage = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await addThought({
-        variables: {
-          thoughtText,
-          // Run the getProfile() method to get access to the unencrypted token value in order to retrieve the user's username 
-          thoughtAuthor: Auth.getProfile().authenticatedPerson.username
-        },
-      });
+      console.log("Hi")
+      // const { data } = await addThought({
+      //   variables: {
+      //     thoughtText,
+      //     // Run the getProfile() method to get access to the unencrypted token value in order to retrieve the user's username 
+      //     thoughtAuthor: Auth.getProfile().authenticatedPerson.username
+      //   },
+      // });
 
       setThoughtText('');
     } catch (err) {
       console.error(err);
     }
   };
+
+  const handleClick = (event) => {
+    <Link to={CheckoutPage}> </Link>
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -60,7 +72,7 @@ const LandingPage = () => {
 
   // Not working 
   let listLength;
-    getAllSpells((sData) => {
+    getAllEquipment((sData) => {
       listLength = sData.length
       // return listLength
     })
@@ -76,8 +88,8 @@ const LandingPage = () => {
               // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            <h3> Inventory </h3>
-            Browse Inventory {totalAvailableItems} / {listLength}
+            <strong style={{display: 'flex', justifyContent: 'center', color: 'black', fontSize: '40px'}}> Inventory List </strong>
+            {/* Browse Inventory {totalAvailableItems} / {listLength} */}
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
@@ -86,19 +98,20 @@ const LandingPage = () => {
             <div className="col-12 col-lg-9">
               <section
                 name="thoughtText"
-                placeholder="Here's a new thought..."
-                value={thoughtText}
                 className="form-input w-100"
-                style={{height: 'auto', resize: 'vertical' }}
-                onChange={handleChange}>
+                 style={{height: 'auto', resize: 'vertical' }}
+                 onChange={handleChange}
+                 >
                    <Inventory />
-              </section>
+                   <Cart />
+                   <Wallet />
+             </section>
             </div>
 
             <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
+              <Link className="btn btn-primary btn-block py-3 checkout-btn1" to={'/checkout'} type="submit">
                 Checkout
-              </button>
+              </Link>
             </div>
             {error && (
               <div className="col-12 my-3 bg-danger text-white p-3">

@@ -1,12 +1,32 @@
 const BASE_URL = "https://www.dnd5eapi.co";
 
-export async function getAllSpells() {
-  const spellIndexes = await fetch(BASE_URL + "/api/spells").then((response) =>
+export async function getAllEquipment() {
+  const equipmentIndexes = await fetch(BASE_URL + "/api/equipment/").then((response) =>
     response.json()
   );
   return Promise.all(
-    spellIndexes.results.map((index) =>
+    equipmentIndexes.results.map((index) =>
       fetch(BASE_URL + index.url).then((response) => response.json())
     )
   );
+}
+
+
+export async function getMagicItems() {
+  const magicItemsIndexes = await fetch(BASE_URL + "/api/magic-items/").then((response) =>
+    response.json()
+  );
+  return Promise.all(
+    magicItemsIndexes.results.map((index) =>
+      fetch(BASE_URL + index.url).then((response) => response.json())
+    )
+  );
+}
+
+
+export async function getEquipmentCategories() {
+  const categories = await fetch(BASE_URL + "/api/equipment-categories").then((response) =>
+    response.json()
+  );
+  return categories.results;
 }
