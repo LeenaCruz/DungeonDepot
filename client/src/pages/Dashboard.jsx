@@ -168,7 +168,6 @@ const homePage = () => {
   </ul>
 </div> */}
 
-                    <button>Create Shop</button>
                   </div>
                 </div>
                 <div className=" col-md-6 col-sm-12">
