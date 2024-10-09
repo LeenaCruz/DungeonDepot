@@ -54,7 +54,7 @@ const typeDefs = `
     users: [User]
     user(username: String!): User
     stores: [Store]
-    store(storeId: ID!): Store
+    getStore(storeId: ID!): Store
     items(storeId: ID!): [Item]
     item(itemId: ID!): Item
     me: User

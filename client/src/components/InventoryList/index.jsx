@@ -30,7 +30,7 @@ const Inventory = () => {
         <ul className="equipment-list">
         {equipment.map((e) => (
             <div className='atc-div' key={e.index}>
-            <EquipmentCard  equipment={e} />
+            <EquipmentCard equipment={e} />
             <button className="ATC-btn-pos" onClick={() => handleClick(e)}>Add to Cart</button>
             </div>
             ))}
