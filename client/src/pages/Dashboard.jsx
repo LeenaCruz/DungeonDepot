@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Wallet from '../components/GamingWallet';
 import EquipmentList from '../components/EquipmentList';
 import CreateStoreForm from '../components/CreateStore';
+import { PURCHASE_ITEMS } from "../utils/mutations";
+import { QUERY_USER } from "../utils/queries";
+import { useMutation } from "@apollo/client";
 // import { Navigate, useParams } from 'react-router-dom';
 
 //SEARCH BAR 
@@ -71,7 +74,14 @@ const homePage = () => {
   //     }
   //   }
   // }
+
+  
   const {cart, setCart} = useCartContext();
+// error in {}
+//   const [purchaseItems, {}] = useMutation(PURCHASE_ITEMS, {
+//     refetchQueries: [QUERY_ME]
+// })
+
   return (
     
     // Users Dashboard
@@ -87,7 +97,7 @@ const homePage = () => {
                   <div> Wallet: {user.wallet} GP </div>
                   {/* how to render the inventory - doesn't accept object */}
                   <div> Inventory: 
-                    
+                    {/* {...cart} */}
                   {cart.map((item, index) => (<div className='item-sep'>{item.name}</div>))}
                     {/* {user.inventory.forEach(element => {
                     element.name
