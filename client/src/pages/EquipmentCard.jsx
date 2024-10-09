@@ -1,7 +1,7 @@
 export default function EquipmentCard({ equipment }) {
     return (
       <li className="equipment-card">
-        <hgroup>
+        <hgroup style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignContent: 'space-around', alignItems: 'center'}}>
           <h4 className="inv-card-header">{equipment.name}</h4>
           <h5 className="tool-text">
             {equipment.equipment_category.name}
