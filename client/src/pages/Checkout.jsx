@@ -24,9 +24,11 @@ const CheckoutPage = () => {
     return (
     <> 
     <div className="checkout-page">
+        <div className="tHeader"> Items in your Cart </div> 
         <CartItemsComponent />
-        <button className="btn btn-primary" onClick={submitPurchase}>Purchase Items</button>
         <Wallet />
+
+        <button className="purchase-btn" onClick={submitPurchase}>Purchase Items</button>
     </div>
     </>
 )
