@@ -8,7 +8,7 @@ export default function EquipmentCard({ equipment }) {
           </h5>
         </hgroup>
         <div className="stats">
-          <p> Description: {equipment.desc} </p>
+          <p> Description: { (equipment.desc != "" ) ? equipment.desc : 'None'}  </p>
           <p> Cost: {equipment.cost.quantity} {equipment.cost.unit}
           </p>
      
