@@ -12,6 +12,7 @@ import { QUERY_ME } from '../utils/queries'
 import AuthService from '../utils/auth';
 
 import { useQuery } from '@apollo/client';
+import { useCartContext } from '../utils/context';
 
 const homePage = () => {
   // const {data, loading} = useQuery(QUERY_ME)
@@ -70,7 +71,7 @@ const homePage = () => {
   //     }
   //   }
   // }
-
+  const {cart, setCart} = useCartContext();
   return (
     
     // Users Dashboard
@@ -82,13 +83,19 @@ const homePage = () => {
           <div className="container">
             <div className="row mb-3">
               <div className="col-md-3 col-sm-12" >
-                <div className="sideBox"> <h4> User Inventory or Create Shop</h4>
-                  <div> Wallet: {user.wallet}</div>
+                <div className="sideBox"> <h4> {data?.me?.username ?? 'N/A'}'s Inventory </h4>
+                  <div> Wallet: {user.wallet} GP </div>
                   {/* how to render the inventory - doesn't accept object */}
-                  <div>{[user.inventory.name]}</div> 
-                  
-                  {data?.me?.username ?? 'N/A'}
-                  <p>${data?.me?.wallet ?? 'N/A'}</p>
+                  <div> Inventory: 
+                    
+                  {cart.map((item, index) => (<div className='item-sep'>{item.name}</div>))}
+                    {/* {user.inventory.forEach(element => {
+                    element.name
+                  })}  */}
+                  </div> 
+
+                  {/* cart.length === 0 ? (<div className='cart-text'>Empty</div>) : */}
+                  {/* <p>${data?.me?.wallet ?? 'N/A'}</p> */}
                   {/* <Wallet /> */}
                 </div>
               </div>
