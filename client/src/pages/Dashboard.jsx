@@ -14,7 +14,9 @@ import AuthService from '../utils/auth';
 import { useQuery } from '@apollo/client';
 
 const homePage = () => {
+  // const {data, loading} = useQuery(QUERY_ME)
   const { loading, error, data } = useQuery(QUERY_ME);
+  const user = data?.me || {}
  //SEARCH BAR
   // const [shopName, setShopName] = useState('');
   // const [items, setItems] = useState([]);
@@ -70,6 +72,7 @@ const homePage = () => {
   // }
 
   return (
+    
     // Users Dashboard
     <div>
 
@@ -80,7 +83,10 @@ const homePage = () => {
             <div className="row mb-3">
               <div className="col-md-3 col-sm-12" >
                 <div className="sideBox"> <h4> User Inventory or Create Shop</h4>
-                  <div> Wallet:</div>
+                  <div> Wallet: {user.wallet}</div>
+                  {/* how to render the inventory - doesn't accept object */}
+                  <div>{[user.inventory.name]}</div> 
+                  
                   {data?.me?.username ?? 'N/A'}
                   <p>${data?.me?.wallet ?? 'N/A'}</p>
                   {/* <Wallet /> */}

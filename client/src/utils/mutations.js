@@ -24,18 +24,16 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_TO_CART = gql `
-  mutation Mutation($itemId: ID!, $quantity: Int!) {
-    addToCart(itemId: $itemId, quantity: $quantity) {
-      cart {
-        item {
-          name
-          _id
-          cost
-        }
-      }
+export const PURCHASE_ITEMS = gql `
+mutation Mutation($items: [ItemInput]) {
+  purchaseItems(items: $items) {
+    _id
+    wallet
+    inventory {
+      cost
     }
   }
+}
 `
 
 export const ADD_THOUGHT = gql`

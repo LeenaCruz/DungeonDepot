@@ -214,11 +214,24 @@ console.log(user);
       // });
       // return store;
     },
-      return {token, user};
-    }
+      // return {token, user};
+    // },
 
-    addToCart: async (parent, args) => {
-      const cart = await 
+    purchaseItems: async (parent, args, context) => {
+      if (context.user) {
+        // array of items
+        const items = args.items
+        const itemCost = items.reduce((currentValue, element) => {
+          return currentValue + element.cost
+        }, 0)
+        const createdCartItems = await Item.insertMany(items)
+        const user = await User.findById(context.user._id)
+        user.wallet -= itemCost
+        user.inventory = [...user.inventory, ...createdCartItems.map(i => i._id)]
+        await user.save()
+        return user
+      }
+      return AuthenticationError
     }
   }
 };

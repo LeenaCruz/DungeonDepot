@@ -28,6 +28,13 @@ const typeDefs = `
     rarity: String
   }
   
+  input ItemInput {
+    name: String
+    description: String
+    cost: Int
+    category: String
+  } 
+  
   type CartItem {
     item: Item
     quantity: Int
@@ -60,7 +67,7 @@ const typeDefs = `
     createStore(name: String!, description: String!): Store
     addItemToStore(storeId: ID!, name: String!, description: String!, cost: Int!, type: String!, rarity: String): Item
     addToCart(itemId: ID!, quantity: Int!): User
-    purchaseItems: User
+    purchaseItems(items: [ItemInput]): User
     removeItemFromCart(itemId: ID!): User
     addItemToShop(storeId: ID!, itemId: ID!): Store
   }
