@@ -49,19 +49,6 @@ console.log("Checking storeId pass:", storeId)
   //   onSearch(searchTerm);
   // }
 
-// const handleAddToShop = async (item) => { 
-// try {
-//   await addItemToShop({
-//     variables: {
-//       storeId: storeId,
-//       itemId: itemId,
-//     }
-//   });
-//   alert('Item added to the shop!')
-// } catch (error) {
-//   alert('Error adding item.')
-// }
-// };
 const handleAddToShop = async (item) => {
   console.log('Soy el Item:', item)
   console.log('Add button HandleAddtoshop, storeId:', storeId)
@@ -85,13 +72,9 @@ variables: {
 })
 console.log("Created Item button works:", createItemData);
 
-//save item to shop
-// const createdItemId = createItemData.createItem._id;
-// console.log('CREATEDITEMID:', createdItemId)
-
+//save item to shop (current)
 const newItem = createItemData?.createItem;
 if (newItem){ 
-
 
     const {data: addItemToShopData} = await addItemToShop({
       variables: {
@@ -142,7 +125,7 @@ if (newItem){
 
   return (
     <div className='search-preview'>
-      <h1>Equipment and Magic Items List</h1>
+      <h2>Search for items</h2>
       
       <input
         type="text"
