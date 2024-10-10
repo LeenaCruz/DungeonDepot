@@ -17,6 +17,7 @@ import AuthService from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { useCartContext } from '../utils/context';
 import StoreComponent from '../components/StoreComponent';
+import StoreList from '../components/StoreList';
 
 const homePage = () => {
   // const {data, loading} = useQuery(QUERY_ME)
@@ -49,15 +50,7 @@ const homePage = () => {
                   <div> Wallet: {user.wallet} GP </div>
                   {/* how to render the inventory - doesn't accept object */}
                   <div> Inventory:
-                    {/* {...cart} */}
-
-                    {cart.map((item, index) => (<div className='item-sep'>{item.name}</div>))}
-
-                  {cart.map((item, index) => (<div className='item-sep' style={{width: 'auto'}}>{item.name}</div>))}
-
-                    {/* {user.inventory.forEach(element => {
-                    element.name
-                  })}  */}
+                   
                   </div>
 
                   {/* cart.length === 0 ? (<div className='cart-text'>Empty</div>) : */}
@@ -75,6 +68,15 @@ const homePage = () => {
                 <div className="sideBox">
                   <h4>Cart</h4>
                   <div> Item List Component?</div>
+                   {/* {...cart} */}
+
+                   {cart.map((item, index) => (<div className='item-sep'>{item.name}</div>))}
+
+{cart.map((item, index) => (<div className='item-sep' style={{width: 'auto'}}>{item.name}</div>))}
+
+  {/* {user.inventory.forEach(element => {
+  element.name
+})}  */}
                   <button>Checkout</button>
 
                 </div>
@@ -108,23 +110,25 @@ const homePage = () => {
     <div className=" col-md-6 col-sm-12">
       <div className="contentBox">
         <h4> Current Shop </h4>
-        <div className='item-row'>
+        <StoreComponent storeId={storeId} />
+        {/* <div className='item-row'>
           <p className='item-name'>Added Item's Name Here</p>
           <p className='item-name'>QTY</p>
           <p className='item-name'>Cost</p>
           <button className='item-button'>Edit</button>
-        </div>
+        </div> */}
       </div>
     </div>
     <div className="col-md-3 col-sm-12">
       <div className="sideBox">
         <h4>GM SHOPS</h4>
+        <StoreList />
         {/* <p>If GM has shops, they should show here.</p> */}
-        <div>
+        {/* <div>
           <div>Shop Card</div>
           <button>Edit</button>
           <button>Delete</button>
-        </div>
+        </div> */}
         {/* <p>If 0 shops then:</p>
         <div> You have no shops created. </div> */}
   
