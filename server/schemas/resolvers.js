@@ -105,6 +105,14 @@ const resolvers = {
       }
     },
   
+    getUserStores: async (_, __, context) => {
+      if (!context.user) {
+        throw AuthenticationError('You must be logged in to view your stores.');
+      }
+
+      const stores = await Store.find({ owner: context.user._id }).populate('items');
+      return stores;
+    },
 
     // Trying to get userWallet
     //     getUserWallet: async (_,__, {context}) => {
