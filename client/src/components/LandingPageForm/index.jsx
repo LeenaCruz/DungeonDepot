@@ -5,9 +5,7 @@ import kingDice from '../../assets/kingDice.png'
 import { QUERY_ME } from '../../utils/queries';
 import Inventory from '../InventoryList';
 import { getAllEquipment } from "../../api";
-
 import Auth from '../../utils/auth';
-import Login from '../../pages/Login';
 import Wallet from '../GamingWallet';
 import Cart from '../Cart'
 import { ADD_USER } from '../../utils/mutations';
@@ -26,6 +24,10 @@ const [totalAvailableItems, setTotalAvailableItems] = useState(0);
       'me'
     ]
   });
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+  };
 
 
   let listLength;
@@ -47,6 +49,7 @@ const [totalAvailableItems, setTotalAvailableItems] = useState(0);
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
+            onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
               <section
