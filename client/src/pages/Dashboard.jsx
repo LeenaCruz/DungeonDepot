@@ -20,7 +20,7 @@ import StoreComponent from '../components/StoreComponent';
 import StoreList from '../components/StoreList';
 
 const homePage = () => {
-  // const {data, loading} = useQuery(QUERY_ME)
+  const { cart, setCart } = useCartContext();
   const { loading, error, data } = useQuery(QUERY_ME);
   const user = data?.me || {}
 
@@ -34,7 +34,7 @@ const homePage = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>
 
-  const { cart, setCart } = useCartContext();
+
   return (
 
     // Users Dashboard
@@ -111,27 +111,12 @@ const homePage = () => {
       <div className="contentBox">
         <h4> Current Shop </h4>
         <StoreComponent storeId={storeId} />
-        {/* <div className='item-row'>
-          <p className='item-name'>Added Item's Name Here</p>
-          <p className='item-name'>QTY</p>
-          <p className='item-name'>Cost</p>
-          <button className='item-button'>Edit</button>
-        </div> */}
       </div>
     </div>
     <div className="col-md-3 col-sm-12">
       <div className="sideBox">
         <h4>GM SHOPS</h4>
         <StoreList />
-        {/* <p>If GM has shops, they should show here.</p> */}
-        {/* <div>
-          <div>Shop Card</div>
-          <button>Edit</button>
-          <button>Delete</button>
-        </div> */}
-        {/* <p>If 0 shops then:</p>
-        <div> You have no shops created. </div> */}
-  
       </div>
     </div>
   </div>
