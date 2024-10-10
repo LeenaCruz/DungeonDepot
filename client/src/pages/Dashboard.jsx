@@ -98,7 +98,7 @@ const homePage = () => {
                   {/* how to render the inventory - doesn't accept object */}
                   <div> Inventory: 
                     {/* {...cart} */}
-                  {cart.map((item, index) => (<div className='item-sep'>{item.name}</div>))}
+                  {cart.map((item, index) => (<div className='item-sep' style={{width: 'auto'}}>{item.name}</div>))}
                     {/* {user.inventory.forEach(element => {
                     element.name
                   })}  */}
