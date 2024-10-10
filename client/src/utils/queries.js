@@ -22,9 +22,9 @@ export const GET_STORE = gql`
       }
       items {
         _id
-        name
         description
         cost
+        name
       }
     }
   }
@@ -55,4 +55,5 @@ export const GET_USER_STORES = gql`
       }
     }
   }
+
 `;
