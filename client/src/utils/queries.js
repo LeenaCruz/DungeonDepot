@@ -22,9 +22,9 @@ export const GET_STORE = gql`
       }
       items {
         _id
-        name
         description
         cost
+        name
       }
     }
   }
@@ -42,4 +42,18 @@ export const QUERY_ME = gql`
       }
     }
   }
+`;
+
+export const GET_USER_STORES = gql`
+  query GetUserStores {
+    getUserStores {
+      _id
+      name
+      items {
+        _id
+        name
+      }
+    }
+  }
+
 `;
