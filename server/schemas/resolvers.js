@@ -7,40 +7,6 @@ const { ObjectId } = require('mongoose').Types
 
 const resolvers = {
   Query: {
-    // items: async () => {
-    //   try {
-    //     // Fetch the list of equipment
-    //     const response = await axios.get('https://www.dnd5eapi.co/api/equipment');
-    //     const items = response.data.results; // Get the list of items
-
-    //     // Array to hold detailed item data
-    //     const detailedItems = [];
-
-    //     // Loop through each item to fetch detailed information
-    //     for (const item of items) {
-    //       const itemResponse = await axios.get(`https://www.dnd5eapi.co/api/equipment/${item.index}`);
-    //       const detailedItem = itemResponse.data;
-
-    //       // Push the detailed item to the array
-    //       detailedItems.push({
-    //         name: detailedItem.name,
-    //         description: detailedItem.description ? detailedItem.description.join(' ') : 'No description available',
-    //         cost: detailedItem.cost.quantity ? detailedItem.cost.quantity.join(' ') : 'No cost available',
-    //         category: detailedItem.equipment_category.name ? detailedItem.equipment_category.name.join(' ') : 'No category available',
-    //         rarity: detailedItem.rarity ? detailedItem.rarity.join('') : 'No rarity availiable',
-    //       });
-    //     }
-
-    //     // Insert detailed items into MongoDB
-    //     await Item.insertMany(detailedItems);
-
-    //     return detailedItems; // Return the detailed items
-    //   } catch (error) {
-    //     console.error('Error fetching items from D&D API:', error);
-    //     throw new Error('Failed to fetch items');
-    //   }
-    // },
-
     items: async (parent, { item, name, category }) => {
       const params = {};
 
@@ -82,18 +48,40 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    getStore: async (_, { storeId }) => {
-      if (context.user) {
+    getStore: async (_, { storeId }, context) => {
+      // Check if the user is authenticated
+      if (!context.user) {
+        throw  AuthenticationError;
+      }
+      try {
         // Find the store by ID and populate the items
         const store = await Store.findById(storeId).populate('items');
 
+        // Handle case where store is not found
         if (!store) {
           throw new Error('Store not found');
         }
 
+        // Return the populated store
         return store;
+      } catch (error) {
+        console.error('Error retrieving store:', error);
+        throw new Error('Failed to retrieve store');
       }
-      throw AuthenticationError;
+    },
+  
+    storess: async (parent, { store, name }) => {
+      const params = {};
+
+      
+
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+
+      return await Store.find(params).populate('name');
     },
 
     // Trying to get userWallet
@@ -201,9 +189,9 @@ const resolvers = {
 
        const  newItem = await Item.create({
           name: item.name,
-          description: item.description,
-          cost: item.cost,
-          category: item.category,
+          description: item.desc,
+          cost: item.cost.quantity,
+          category: item.equipment_category.name,
           rarity: item.rarity,
         });
       

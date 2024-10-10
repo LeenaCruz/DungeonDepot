@@ -62,7 +62,7 @@ const handleAddToShop = async (item) => {
 const {data: createItemData} = await createItem({
 variables: {
   item: {
-  name: item.name,
+  name: item.name || "No name",
   description: item.desc ? item.desc.join(", ") : "No description",
   cost: item.cost?.quantity || 0,
   category: item.equipment_category?.name || "",
