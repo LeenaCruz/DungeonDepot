@@ -70,18 +70,13 @@ const resolvers = {
       }
     },
   
-    storess: async (parent, { store, name }) => {
-      const params = {};
-
-      
-
-      if (name) {
-        params.name = {
-          $regex: name
-        };
+    getUserStores: async (_, __, context) => {
+      if (!context.user) {
+        throw AuthenticationError('You must be logged in to view your stores.');
       }
 
-      return await Store.find(params).populate('name');
+      const stores = await Store.find({ owner: context.user._id }).populate('items');
+      return stores;
     },
 
     // Trying to get userWallet
