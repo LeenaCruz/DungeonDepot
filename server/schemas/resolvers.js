@@ -142,6 +142,42 @@ const resolvers = {
     //   }
     // },
 
+//Second form
+    // createItem: async (parent,  {input }, context) => {
+    //   console.log("Im the item full:", item)
+    //   const {name, description, cost, category, rarity} = input;
+    //   console.log("Item input received in resolver:", input);
+    //   if (!context.user) {
+    //     throw AuthenticationError
+    //   }
+
+    //   let newItem = await Item.findOne({ name: item.name });
+
+    //   // if (!newItem) {
+    //   //   newItem = await Item.create({
+    //   //     name: item.name,
+    //   //     description: item.desc,
+    //   //     cost: item.cost.quantity,
+    //   //     category: item.equipment_category.name,
+    //   //     rarity: item.rarity.name,
+    //   //   })
+    //   // }
+
+    //   // Item.push(newItem._id);
+
+  
+    //   if (!newItem) {
+    //     newItem = await Item.create({
+    //       name,
+    //       description,
+    //       cost,
+    //       category,
+    //       rarity,
+    //     });
+    //   }
+
+    //   return newItem;
+    // },
 
     createItem: async (parent,  {item }, context) => {
       console.log("Im the item full:", item)
@@ -149,20 +185,33 @@ const resolvers = {
         throw AuthenticationError
       }
 
-      let newItem = await Item.findOne({ name: item.name });
+      // let newItem = await Item.findOne({ name: item.name });
 
-      if (!newItem) {
-        newItem = await Item.create({
+      // if (!newItem) {
+      //   newItem = await Item.create({
+      //     name: item.name,
+      //     description: item.desc,
+      //     cost: item.cost.quantity,
+      //     category: item.equipment_category.name,
+      //     rarity: item.rarity.name,
+      //   })
+      // }
+
+      // Item.push(newItem._id);
+
+  
+
+       const  newItem = await Item.create({
           name: item.name,
-          description: item.desc,
-          cost: item.cost.quantity,
-          category: item.equipment_category.name,
+          description: item.description,
+          cost: item.cost,
+          category: item.category,
           rarity: item.rarity,
-        })
-      }
-
-      Item.push(newItem._id);
-
+        });
+      
+console.log("Im a new Item:", newItem)
+await newItem.save();
+      return newItem;
     },
 
 
@@ -170,7 +219,7 @@ const resolvers = {
       try {
         console.log("Im the itemId:", itemId);
         console.log("Im the storeId when adding an item:", storeId)
-        const store = await Store.findById(ObjectId(storeId));
+        const store = await Store.findById(storeId);
         if (!store) {
           throw new Error('Store not found');
         }

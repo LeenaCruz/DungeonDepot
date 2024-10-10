@@ -91,16 +91,29 @@ mutation CreateStore($name: String!, $description: String!){
   }
 }`;
 
+// export const CREATE_ITEM = gql`
+// mutation CreateItem($name: String!, $description: String, $cost: Int, $category: String, $rarity: String ){
+// createItem(name: $name, description: $description, cost: $cost, category: $category,rarity: $rarity) {
+//   _id
+//     name
+//     description
+//     cost
+//     category
+//     rarity
+// }
+// }
+// `;
+
+
 export const CREATE_ITEM = gql`
-mutation CreateItem($name: String!, $description: String, $cost: Int, $category: String, $rarity: String )
-createItem(name: $name, description: $description, cost: $cost, category: $category,rarity: $rarity) {
-  _id
+mutation CreateItem($item: ItemInput!){
+  createItem(item: $item){
+    _id
     name
     description
     cost
     category
     rarity
+  }
 }
-`;
-
-
+`

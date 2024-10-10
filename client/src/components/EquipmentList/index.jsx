@@ -62,7 +62,8 @@ console.log("Checking storeId pass:", storeId)
 //   alert('Error adding item.')
 // }
 // };
-const handleAddToShop = async (itemId) => {
+const handleAddToShop = async (item) => {
+  console.log('Soy el Item:', item)
   console.log('Add button HandleAddtoshop, storeId:', storeId)
   if (!storeId) {
     console.error('No store created yet');
@@ -70,21 +71,32 @@ const handleAddToShop = async (itemId) => {
   } 
   try { 
 
-    // add item to DB
-const {data} = await createItem({
+    // Create the item 
+const {data: createItemData} = await createItem({
 variables: {
-  item: itemId
-}
+  item: {
+  name: item.name,
+  description: item.desc ? item.desc.join(", ") : "No description",
+  cost: item.cost?.quantity || 0,
+  category: item.equipment_category?.name || "",
+  rarity: item.rarity?.name || 'Common',
+},
+},
 })
+console.log("Created Item button works:", createItemData);
 
-//if item created
-    // const {data} = await addItemToShop({
-    //   variables: {
-    //     storeId: storeId,
-    //     itemId: itemId,
-    //   },
-    // });
-    console.log('Item added to the shop:',data)
+//save item to shop
+const createdItemId = createItemData.createItem._id;
+console.log('CREATEDITEMID:', createdItemId)
+
+    const {data: addItemToShopData} = await addItemToShop({
+      variables: {
+        storeId: storeId,
+        itemId: createdItemId,
+      },
+    });
+
+    console.log('Item added to the shop:',addItemToShopData)
   } catch (err) {
     console.error('Error adding item to the shop:', err)
   }
