@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useMutation } from '@apollo/client';
 import { getAllEquipment, getMagicItems, getEquipmentCategories } from '../../api';
-import { ADD_ITEM_TO_SHOP } from '../../utils/mutations';
+import { ADD_ITEM_TO_SHOP, CREATE_ITEM } from '../../utils/mutations';
 
 const EquipmentList = ({storeId}) => {
   const [equipment, setEquipment] = useState([]);
@@ -15,6 +15,7 @@ const EquipmentList = ({storeId}) => {
   const [hasSearched, setHasSearched] = useState(false);
 
 const [addItemToShop] = useMutation(ADD_ITEM_TO_SHOP);
+const [createItem] = useMutation(CREATE_ITEM);
 
 console.log("Checking storeId pass:", storeId)
   useEffect(() => {
@@ -67,13 +68,22 @@ const handleAddToShop = async (itemId) => {
     console.error('No store created yet');
     return;
   } 
-  try {
-    const {data} = await addItemToShop({
-      variables: {
-        storeId: storeId,
-        itemId: itemId,
-      },
-    });
+  try { 
+
+    // add item to DB
+const {data} = await createItem({
+variables: {
+  item: itemId
+}
+})
+
+//if item created
+    // const {data} = await addItemToShop({
+    //   variables: {
+    //     storeId: storeId,
+    //     itemId: itemId,
+    //   },
+    // });
     console.log('Item added to the shop:',data)
   } catch (err) {
     console.error('Error adding item to the shop:', err)
@@ -144,7 +154,7 @@ const handleAddToShop = async (itemId) => {
               <li key={item.index}>
                 <h2>{item.name}</h2>
                 <p>{item.desc || item.desc.join(', ')}</p>
-                <button onClick={() => handleAddToShop(item.index)}>Add</button>
+                <button onClick={() => handleAddToShop(item)}>Add</button>
               </li>
             ))
           ) : (

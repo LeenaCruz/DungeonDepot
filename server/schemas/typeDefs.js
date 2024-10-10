@@ -21,10 +21,10 @@ const typeDefs = `
 
   type Item {
     _id: ID!
-    name: String
+    name: String!
     description: String
     cost: Int
-    type: String
+    category: String
     rarity: String
   }
   
@@ -69,7 +69,8 @@ const typeDefs = `
     addToCart(itemId: ID!, quantity: Int!): User
     purchaseItems(items: [ItemInput]): User
     removeItemFromCart(itemId: ID!): User
-    addItemToShop(storeId: ID!, itemId: ID!): Store
+    createItem(name: String!, description: String, cost: Int, category: String, rarity: String ) : Item
+    addItemToShop(storeId: ID!, itemId: ID): Store
   }
 `;
 

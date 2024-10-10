@@ -2,7 +2,7 @@ const { User, Item } = require('../models');
 const Store = require('../models/Store')
 const { signToken, AuthenticationError } = require('../utils/auth');
 const axios = require('axios');
-const {ObjectId} = require('mongoose').Types
+const { ObjectId } = require('mongoose').Types
 
 
 const resolvers = {
@@ -77,23 +77,23 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id)
-console.log(user);
+        console.log(user);
         return user;
       }
       throw AuthenticationError;
     },
     getStore: async (_, { storeId }) => {
       if (context.user) {
-      // Find the store by ID and populate the items
-      const store = await Store.findById(storeId).populate('items');
-      
-      if (!store) {
-        throw new Error('Store not found');
+        // Find the store by ID and populate the items
+        const store = await Store.findById(storeId).populate('items');
+
+        if (!store) {
+          throw new Error('Store not found');
+        }
+
+        return store;
       }
-    
-      return store;
-    }
-    throw AuthenticationError;
+      throw AuthenticationError;
     },
 
     // Trying to get userWallet
@@ -142,17 +142,43 @@ console.log(user);
     //   }
     // },
 
-    addItemToShop: async(_,{storeId, itemId}) => {
+
+    createItem: async (parent,  {item }, context) => {
+      console.log("Im the item full:", item)
+      if (!context.user) {
+        throw AuthenticationError
+      }
+
+      let newItem = await Item.findOne({ name: item.name });
+
+      if (!newItem) {
+        newItem = await Item.create({
+          name: item.name,
+          description: item.desc,
+          cost: item.cost.quantity,
+          category: item.equipment_category.name,
+          rarity: item.rarity,
+        })
+      }
+
+      Item.push(newItem._id);
+
+    },
+
+
+    addItemToShop: async (_, { storeId, itemId }) => {
       try {
         console.log("Im the itemId:", itemId);
         console.log("Im the storeId when adding an item:", storeId)
-const store = await Store.findById(ObjectId(storeId));
-if (!store) {
-  throw new Error('Store not found');
-}
-store.items.push(itemId);
-await store.save();
-return store;
+        const store = await Store.findById(ObjectId(storeId));
+        if (!store) {
+          throw new Error('Store not found');
+        }
+
+
+        store.items.push(itemId);
+        await store.save();
+        return store;
       } catch (error) {
         throw new Error('Failed to add item');
       }
@@ -184,7 +210,7 @@ return store;
         throw new Error('Store creation failed')
       }
     },
-  
+
     purchaseItems: async (parent, args, context) => {
       if (context.user) {
         // array of items
