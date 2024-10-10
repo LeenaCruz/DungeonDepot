@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useMutation} from '@apollo/client';
 import { CREATE_STORE } from '../../utils/mutations';
 
-const CreateStoreForm = () => {
+const CreateStoreForm = ({onStoreCreated}) => {
     const [storeName, setStoreName] = useState('');
     const [storeDescription, setStoreDescription] = useState('');
     const [createStore] = useMutation(CREATE_STORE);
@@ -14,6 +14,11 @@ const CreateStoreForm = () => {
             const {data} = await createStore({
                 variables: {name:storeName, description:storeDescription},
             });
+            const newStoreId = data?.createStore?._id;
+            if(onStoreCreated) {
+                onStoreCreated(newStoreId);
+             }
+        
             console.log('Store created:', data.createStore)
             setStoreName(' ');
             setStoreDescription(' ');
