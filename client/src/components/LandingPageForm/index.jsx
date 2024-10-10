@@ -2,36 +2,24 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import kingDice from '../../assets/kingDice.png'
-
-import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_ME } from '../../utils/queries';
 import Inventory from '../InventoryList';
 import { getAllEquipment } from "../../api";
-
 import Auth from '../../utils/auth';
-import Login from '../../pages/Login';
 import Wallet from '../GamingWallet';
 import Cart from '../Cart'
+import { ADD_USER } from '../../utils/mutations';
 
 const LandingPage = () => {
-  // const [thoughtText, setThoughtText] = useState('');
 
-  // const [characterCount, setCharacterCount] = useState(0);
+const [itemCount, setItemCount] = useState(0);
+const [totalAvailableItems, setTotalAvailableItems] = useState(0);
 
-  // accumulates the items added to cart by the user 
-  const [itemCount, setItemCount] = useState(0);
-  //Define thoughtText
-const [thoughtText,setThoughtText] = useState(0);
-  // adds up and updates the total items in the gm's store
-  const [totalAvailableItems, setTotalAvailableItems] = useState(0);
 
-// const error = null;
-
-  const [addThought, { error }] = useMutation
-  (ADD_THOUGHT, {
+    const [addUser, { error }] = useMutation
+  (ADD_USER, {
     refetchQueries: [
-      // QUERY_THOUGHTS,
-      'getThoughts',
+      'getUser',
       QUERY_ME,
       'me'
     ]
@@ -39,38 +27,12 @@ const [thoughtText,setThoughtText] = useState(0);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try {
-      console.log("Hi")
-      // const { data } = await addThought({
-      //   variables: {
-      //     thoughtText,
-      //     // Run the getProfile() method to get access to the unencrypted token value in order to retrieve the user's username 
-      //     thoughtAuthor: Auth.getProfile().authenticatedPerson.username
-      //   },
-      // });
-
-      setThoughtText('');
-    } catch (err) {
-      console.error(err);
-    }
   };
 
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    if (name === 'thoughtText' && value.length <= 280) {
-      setThoughtText(value);
-      setCharacterCount(value.length);
-    }
-  };
-
-
-  // Not working 
   let listLength;
     getAllEquipment((sData) => {
       listLength = sData.length
-      // return listLength
     })
     
   return (
@@ -81,11 +43,9 @@ const [thoughtText,setThoughtText] = useState(0);
           <p
             className={`m-0 ${
               itemCount === totalAvailableItems || error ? 'text-danger' : ''
-              // characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
             <strong style={{display: 'flex', justifyContent: 'center', color: '#4C061D', fontSize: '40px'}}> Inventory List </strong>
-            {/* Browse Inventory {totalAvailableItems} / {listLength} */}
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
@@ -93,10 +53,8 @@ const [thoughtText,setThoughtText] = useState(0);
           >
             <div className="col-12 col-lg-9">
               <section
-                name="thoughtText"
                 className="form-input w-100"
                  style={{height: 'auto', resize: 'vertical' }}
-                 onChange={handleChange}
                  >
                    <Inventory />
                    <Cart />
