@@ -11,7 +11,7 @@ const typeDefs = `
   }
 
   type Store {
-    _id: ID
+    _id: ID!
     name: String
     description: String
     owner: User
@@ -20,11 +20,11 @@ const typeDefs = `
   }
 
   type Item {
-    _id: ID
+    _id: ID!
     name: String
     description: String
     cost: Int
-    type: String
+    category: String
     rarity: String
   }
   
@@ -33,6 +33,7 @@ const typeDefs = `
     description: String
     cost: Int
     category: String
+    rarity: String
   } 
   
   type CartItem {
@@ -69,7 +70,8 @@ const typeDefs = `
     addToCart(itemId: ID!, quantity: Int!): User
     purchaseItems(items: [ItemInput]): User
     removeItemFromCart(itemId: ID!): User
-    addItemToShop(storeId: ID!, itemId: ID!): Store
+    createItem(item: ItemInput!) : Item
+    addItemToShop(storeId: ID!, itemId: ID): Store
   }
 `;
 

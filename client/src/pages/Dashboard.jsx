@@ -21,31 +21,13 @@ const homePage = () => {
   // const {data, loading} = useQuery(QUERY_ME)
   const { loading, error, data } = useQuery(QUERY_ME);
   const user = data?.me || {}
- //SEARCH BAR
-  // const [shopName, setShopName] = useState('');
-  // const [items, setItems] = useState([]);
-  // const [filteredItems, setFilteredItems] = useState([]);
-  // //Fetch items from API
-  // useEffect(() => {
-  //   const fetchItems = async () => {
-  //     try {
-  //       const data = await getAllEquipment();
-  //       setItems(data);
-  //       setFilteredItems(data);
-  //     } catch (error) {
-  //       console.log('Error fetching items:', error)
-  //     }
-  //   };
-  //   fetchItems();
-  // }, []);
 
-  // const handleSearch = (query) => { 
-  //   const filtered = items.filter((item) => 
-  //     item.name.toLowerCase().includes(query.toLowerCase())
-  // );
-  // setFilteredItems(filtered);
-  // }
+  const [storeId, setStoreId] = useState(null);
 
+  const handleStoreCreated = (newStoreId) => {
+    setStoreId(newStoreId);
+    console.log('New store created with ID:', newStoreId)
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>
@@ -112,7 +94,7 @@ const homePage = () => {
               <div className=" col-md-6 col-sm-12">
                 <div className="contentBox">
                   <div> "Name of the GameMaster's" Shop</div>
-                  <EquipmentList />
+                  <EquipmentList storeId={storeId} />
                 </div>
               </div>
               <div className="col-md-3 col-sm-12">
@@ -142,55 +124,8 @@ const homePage = () => {
               <div className="row mb-3">
                 <div className="col-md-3 col-sm-12" >
                   <div className="sideBox"> 
-                    <CreateStoreForm />
-                    {/* <h4> CREATE SHOP</h4> */}
-                    {/* <p> Name </p> */}
-                    {/* <form onSubmit = {handleFormSubmit}>
-                    <input 
-                    placeholder='Store Name'
-                    name='shop'
-                    type='text'
-                    value={shopState.shop}
-                    onChage={handleChange}
-                    />
-                  
-                   
-                    <button>Add Items</button>
-                    <p> Search for an item:</p>
-                    <div> SEARCH BAR COMPONENT HERE</div>
-                    <div> Items show here, each one with add button </div>
-                 <button>Create Shop</button>
-                 </form> */}
-
-                    {/* Layout Only */}
-                    {/* <input
-                      placeholder='What is your shop name?'
-                    /> */}
-
-                    {/* <SearchBar onSearch={handleSearch} /> */}
-                    <EquipmentList />
-
-                    {/* <p>Results:</p> */}
-                    {/* <div className='item-row'>
-                      <p className='item-name'>Item Name</p>
-                      <button className='item-button'>Add</button>
-                    </div>
-                    <div className='item-row'>
-                      <p className='item-name'>Item Name</p>
-                      <button className='item-button'>Add</button>
-                    </div> */}
-
-{/* <div className='search-preview'>
-  <ul className='item-list'>
-    {filteredItems.map((item) => (
-      <li key={item.id} className='item-name' >
-        {item.name}
-        <button className='item-button'>Add
-          </button></li>
-    ))}
-  </ul>
-</div> */}
-
+                    <CreateStoreForm onStoreCreated={handleStoreCreated} />
+                    <EquipmentList storeId={storeId} />
                   </div>
                 </div>
                 <div className=" col-md-6 col-sm-12">

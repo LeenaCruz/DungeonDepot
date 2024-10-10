@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useMutation } from '@apollo/client';
 import { getAllEquipment, getMagicItems, getEquipmentCategories } from '../../api';
-import { ADD_ITEM_TO_SHOP } from '../../utils/mutations';
+import { ADD_ITEM_TO_SHOP, CREATE_ITEM } from '../../utils/mutations';
 
-const EquipmentList = () => {
+const EquipmentList = ({storeId}) => {
   const [equipment, setEquipment] = useState([]);
   const [magicItems, setMagicItems] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -15,7 +15,9 @@ const EquipmentList = () => {
   const [hasSearched, setHasSearched] = useState(false);
 
 const [addItemToShop] = useMutation(ADD_ITEM_TO_SHOP);
+const [createItem] = useMutation(CREATE_ITEM);
 
+console.log("Checking storeId pass:", storeId)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,20 +49,63 @@ const [addItemToShop] = useMutation(ADD_ITEM_TO_SHOP);
   //   onSearch(searchTerm);
   // }
 
-const handleAddToShop = async (item) => { 
-try {
-  await addItemToShop({
-    variables: {
-      storeId: storeId,
-      itemId: itemId,
-    }
-  });
-  alert('Item added to the shop!')
-} catch (error) {
-  alert('Error adding item.')
-}
-};
+// const handleAddToShop = async (item) => { 
+// try {
+//   await addItemToShop({
+//     variables: {
+//       storeId: storeId,
+//       itemId: itemId,
+//     }
+//   });
+//   alert('Item added to the shop!')
+// } catch (error) {
+//   alert('Error adding item.')
+// }
+// };
+const handleAddToShop = async (item) => {
+  console.log('Soy el Item:', item)
+  console.log('Add button HandleAddtoshop, storeId:', storeId)
+  if (!storeId) {
+    console.error('No store created yet');
+    return;
+  } 
+  try { 
 
+    // Create the item 
+const {data: createItemData} = await createItem({
+variables: {
+  item: {
+  name: item.name,
+  description: item.desc ? item.desc.join(", ") : "No description",
+  cost: item.cost?.quantity || 0,
+  category: item.equipment_category?.name || "",
+  rarity: item.rarity?.name || 'Common',
+},
+},
+})
+console.log("Created Item button works:", createItemData);
+
+//save item to shop
+// const createdItemId = createItemData.createItem._id;
+// console.log('CREATEDITEMID:', createdItemId)
+
+const newItem = createItemData?.createItem;
+if (newItem){ 
+
+
+    const {data: addItemToShopData} = await addItemToShop({
+      variables: {
+        storeId: storeId,
+        itemId: newItem._id,
+      },
+    });
+
+    console.log('Item added to the shop:',addItemToShopData)
+  }
+  } catch (err) {
+    console.error('Error adding item to the shop:', err)
+  }
+}
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -126,7 +171,7 @@ try {
               <li key={item.index}>
                 <h2>{item.name}</h2>
                 <p>{item.desc || item.desc.join(', ')}</p>
-                <button onClick={() => handleAddToShop(item.index)}>Add</button>
+                <button onClick={() => handleAddToShop(item)}>Add</button>
               </li>
             ))
           ) : (

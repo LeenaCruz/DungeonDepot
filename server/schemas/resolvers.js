@@ -2,6 +2,7 @@ const { User, Item } = require('../models');
 const Store = require('../models/Store')
 const { signToken, AuthenticationError } = require('../utils/auth');
 const axios = require('axios');
+const { ObjectId } = require('mongoose').Types
 
 
 const resolvers = {
@@ -76,28 +77,23 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id)
-        // .populate({
-          // path: 'inventory.item',
-          // populate: 'item'
-        // });
-        // user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-console.log(user);
+        console.log(user);
         return user;
       }
       throw AuthenticationError;
     },
     getStore: async (_, { storeId }) => {
       if (context.user) {
-      // Find the store by ID and populate the items
-      const store = await Store.findById(storeId).populate('items');
-      
-      if (!store) {
-        throw new Error('Store not found');
+        // Find the store by ID and populate the items
+        const store = await Store.findById(storeId).populate('items');
+
+        if (!store) {
+          throw new Error('Store not found');
+        }
+
+        return store;
       }
-    
-      return store;
-    }
-    throw AuthenticationError;
+      throw AuthenticationError;
     },
 
     // Trying to get userWallet
@@ -131,19 +127,113 @@ console.log(user);
       const token = signToken(user);
       return { token, user };
     },
-    addItemToShop: async (_, { storeId, itemId }, { dataSources }) => {
+    //old addItemToShop
+    // addItemToShop: async (_, { storeId, itemId }, { dataSources }) => {
+    //   try {
+    //     const store = await dataSources.Store.findById(storeId)
+    //     if (!store) {
+    //       throw new Error('Store not found');
+    //     }
+    //     store.items.push(itemId);
+    //     await store.save();
+    //     return store;
+    //   } catch (error) {
+    //     throw new Error('Failed to add item')
+    //   }
+    // },
+
+//Second form
+    // createItem: async (parent,  {input }, context) => {
+    //   console.log("Im the item full:", item)
+    //   const {name, description, cost, category, rarity} = input;
+    //   console.log("Item input received in resolver:", input);
+    //   if (!context.user) {
+    //     throw AuthenticationError
+    //   }
+
+    //   let newItem = await Item.findOne({ name: item.name });
+
+    //   // if (!newItem) {
+    //   //   newItem = await Item.create({
+    //   //     name: item.name,
+    //   //     description: item.desc,
+    //   //     cost: item.cost.quantity,
+    //   //     category: item.equipment_category.name,
+    //   //     rarity: item.rarity.name,
+    //   //   })
+    //   // }
+
+    //   // Item.push(newItem._id);
+
+  
+    //   if (!newItem) {
+    //     newItem = await Item.create({
+    //       name,
+    //       description,
+    //       cost,
+    //       category,
+    //       rarity,
+    //     });
+    //   }
+
+    //   return newItem;
+    // },
+
+    createItem: async (parent,  {item }, context) => {
+      console.log("Im the item full:", item)
+      if (!context.user) {
+        throw AuthenticationError
+      }
+
+      // let newItem = await Item.findOne({ name: item.name });
+
+      // if (!newItem) {
+      //   newItem = await Item.create({
+      //     name: item.name,
+      //     description: item.desc,
+      //     cost: item.cost.quantity,
+      //     category: item.equipment_category.name,
+      //     rarity: item.rarity.name,
+      //   })
+      // }
+
+      // Item.push(newItem._id);
+
+       const  newItem = await Item.create({
+          name: item.name,
+          description: item.description,
+          cost: item.cost,
+          category: item.category,
+          rarity: item.rarity,
+        });
+      
+console.log("Im a new Item:", newItem)
+await newItem.save();
+      return newItem;
+    },
+
+
+    addItemToShop: async (_, { storeId, itemId }) => {
       try {
-        const store = await dataSources.Store.findById(storeId)
+        console.log("Im the itemId:", itemId);
+        console.log("Im the storeId when adding an item:", storeId)
+        const store = await Store.findById(Object(storeId));
         if (!store) {
           throw new Error('Store not found');
         }
+
+
         store.items.push(itemId);
         await store.save();
+        console.log('Updated store:', store);
         return store;
       } catch (error) {
-        throw new Error('Failed to add item')
+        throw new Error('Failed to add item');
       }
     },
+
+
+
     createStore: async (parent, { name, description }, context) => {
       if (!context.user) {
         throw AuthenticationError
@@ -167,17 +257,7 @@ console.log(user);
         console.error('Error creating store:', err);;
         throw new Error('Store creation failed')
       }
-
-      // const store = await Store.create({
-      //   name,
-      //   description,
-      //   owner: context.user._id,
-
-      // });
-      // return store;
     },
-      // return {token, user};
-    // },
 
     purchaseItems: async (parent, args, context) => {
       if (context.user) {

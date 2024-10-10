@@ -53,12 +53,12 @@ export const ADD_COMMENT = gql`
 `;
 
 export const ADD_ITEM_TO_SHOP = gql`
-mutation AddItemToShop($storeId: ID!, $itemId: ID!) {
+mutation AddItemToShop($storeId: ID!, $itemId: ID) {
   addItemToShop(storeId: $storeId, itemId: $itemId) {
     _id
     name
     items {
-      id
+      _id
       name
     }
   }
@@ -73,11 +73,32 @@ mutation CreateStore($name: String!, $description: String!){
     owner {
       username
     }
-    items {
-      name
-    }
   }
 }`;
 
+// export const CREATE_ITEM = gql`
+// mutation CreateItem($name: String!, $description: String, $cost: Int, $category: String, $rarity: String ){
+// createItem(name: $name, description: $description, cost: $cost, category: $category,rarity: $rarity) {
+//   _id
+//     name
+//     description
+//     cost
+//     category
+//     rarity
+// }
+// }
+// `;
 
 
+export const CREATE_ITEM = gql`
+mutation CreateItem($item: ItemInput!){
+  createItem(item: $item){
+    _id
+    name
+    description
+    cost
+    category
+    rarity
+  }
+}
+`
