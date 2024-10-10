@@ -59,7 +59,6 @@ mutation AddItemToShop($storeId: ID!, $itemId: ID) {
     name
     items {
       _id
-      name
     }
   }
 }`;
@@ -75,20 +74,6 @@ mutation CreateStore($name: String!, $description: String!){
     }
   }
 }`;
-
-// export const CREATE_ITEM = gql`
-// mutation CreateItem($name: String!, $description: String, $cost: Int, $category: String, $rarity: String ){
-// createItem(name: $name, description: $description, cost: $cost, category: $category,rarity: $rarity) {
-//   _id
-//     name
-//     description
-//     cost
-//     category
-//     rarity
-// }
-// }
-// `;
-
 
 export const CREATE_ITEM = gql`
 mutation CreateItem($item: ItemInput!){
