@@ -12,14 +12,18 @@ export const QUERY_USER = gql`
 
 
 export const GET_STORE = gql`
-  query GetStore($storeId: ID!) {
+  query getStore($storeId: ID!) {
     getStore(storeId: $storeId) {
-      id
+      _id
       name
+      owner {
+        _id
+        username
+      }
       items {
-        id
+        _id
         name
-        category
+        description
         cost
       }
     }
