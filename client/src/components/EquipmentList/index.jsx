@@ -86,17 +86,22 @@ variables: {
 console.log("Created Item button works:", createItemData);
 
 //save item to shop
-const createdItemId = createItemData.createItem._id;
-console.log('CREATEDITEMID:', createdItemId)
+// const createdItemId = createItemData.createItem._id;
+// console.log('CREATEDITEMID:', createdItemId)
+
+const newItem = createItemData?.createItem;
+if (newItem){ 
+
 
     const {data: addItemToShopData} = await addItemToShop({
       variables: {
         storeId: storeId,
-        itemId: createdItemId,
+        itemId: newItem._id,
       },
     });
 
     console.log('Item added to the shop:',addItemToShopData)
+  }
   } catch (err) {
     console.error('Error adding item to the shop:', err)
   }

@@ -21,7 +21,7 @@ const typeDefs = `
 
   type Item {
     _id: ID!
-    name: String!
+    name: String
     description: String
     cost: Int
     category: String

@@ -199,8 +199,6 @@ const resolvers = {
 
       // Item.push(newItem._id);
 
-  
-
        const  newItem = await Item.create({
           name: item.name,
           description: item.description,
@@ -219,7 +217,7 @@ await newItem.save();
       try {
         console.log("Im the itemId:", itemId);
         console.log("Im the storeId when adding an item:", storeId)
-        const store = await Store.findById(storeId);
+        const store = await Store.findById(Object(storeId));
         if (!store) {
           throw new Error('Store not found');
         }
@@ -227,6 +225,7 @@ await newItem.save();
 
         store.items.push(itemId);
         await store.save();
+        console.log('Updated store:', store);
         return store;
       } catch (error) {
         throw new Error('Failed to add item');
