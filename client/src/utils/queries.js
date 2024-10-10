@@ -22,9 +22,9 @@ export const GET_STORE = gql`
       }
       items {
         _id
-        name
         description
         cost
+        name
       }
     }
   }
