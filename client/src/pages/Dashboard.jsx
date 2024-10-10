@@ -16,6 +16,7 @@ import AuthService from '../utils/auth';
 
 import { useQuery } from '@apollo/client';
 import { useCartContext } from '../utils/context';
+import StoreComponent from '../components/StoreComponent';
 
 const homePage = () => {
   // const {data, loading} = useQuery(QUERY_ME)
@@ -94,7 +95,7 @@ const homePage = () => {
               <div className=" col-md-6 col-sm-12">
                 <div className="contentBox">
                   <div> "Name of the GameMaster's" Shop</div>
-                  <EquipmentList storeId={storeId} />
+                  <StoreComponent storeId={storeId} />
                 </div>
               </div>
               <div className="col-md-3 col-sm-12">
