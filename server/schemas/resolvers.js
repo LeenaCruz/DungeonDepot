@@ -82,19 +82,29 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    getStore: async (_, { storeId }) => {
-      if (context.user) {
+    getStore: async (_, { storeId }, context) => {
+      // Check if the user is authenticated
+      if (!context.user) {
+        throw new AuthenticationError('User not authenticated');
+      }
+
+      try {
         // Find the store by ID and populate the items
         const store = await Store.findById(storeId).populate('items');
 
+        // Handle case where store is not found
         if (!store) {
           throw new Error('Store not found');
         }
 
+        // Return the populated store
         return store;
+      } catch (error) {
+        console.error('Error retrieving store:', error);
+        throw new Error('Failed to retrieve store');
       }
-      throw AuthenticationError;
     },
+  
 
     // Trying to get userWallet
     //     getUserWallet: async (_,__, {context}) => {

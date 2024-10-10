@@ -9,7 +9,7 @@ const itemSchema = new Schema({
     },
     description: {
         type: String,
-        required: true, // descripes the item (Stats and abilities)
+        required: false, // descripes the item (Stats and abilities)
     },
     cost: {
         type: Number,

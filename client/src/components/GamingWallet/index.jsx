@@ -12,7 +12,7 @@ const user = data?.me || {}
         Gaming Wallet
       </header>
       <div className="wallet-bal">
-        Balance: {user.wallet}
+        Balance: {user.wallet} GP
       </div>
       </div>
       </div>
