@@ -26,7 +26,7 @@ const StoreComponent = ({ storeId }) => {
       <ul>
         {data.getStore.items.map(item => (
           <li key={item._id}>
-            <h3>{item.name}</h3>
+            <h3>{item.index}</h3>
             {/* <p>{item.description}</p> */}
             <p>Cost: {item.cost}</p>
           </li>

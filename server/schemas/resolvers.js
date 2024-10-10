@@ -85,9 +85,8 @@ const resolvers = {
     getStore: async (_, { storeId }, context) => {
       // Check if the user is authenticated
       if (!context.user) {
-        throw new AuthenticationError('User not authenticated');
+        throw  AuthenticationError;
       }
-
       try {
         // Find the store by ID and populate the items
         const store = await Store.findById(storeId).populate('items');
@@ -211,9 +210,9 @@ const resolvers = {
 
        const  newItem = await Item.create({
           name: item.name,
-          description: item.description,
-          cost: item.cost,
-          category: item.category,
+          description: item.desc,
+          cost: item.cost.quantity,
+          category: item.equipment_category.name,
           rarity: item.rarity,
         });
       
