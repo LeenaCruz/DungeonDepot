@@ -60,6 +60,7 @@ const typeDefs = `
     item(itemId: ID!): Item
     me: User
     getUserWallet: Int
+    getUserStores: [Store]
   }
 
   type Mutation {
