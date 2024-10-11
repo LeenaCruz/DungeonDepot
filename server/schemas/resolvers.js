@@ -182,16 +182,9 @@ const resolvers = {
 
       // Item.push(newItem._id);
 
-       const  newItem = await Item.create({
-          name: item.name,
-          description: item.desc,
-          cost: item.cost.quantity,
-          category: item.equipment_category.name,
-          rarity: item.rarity,
-        });
+       const  newItem = await Item.create(item);
       
 console.log("Im a new Item:", newItem)
-await newItem.save();
       return newItem;
     },
 
