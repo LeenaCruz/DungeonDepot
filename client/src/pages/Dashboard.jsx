@@ -116,7 +116,9 @@ const homePage = () => {
     <div className="col-md-3 col-sm-12">
       <div className="sideBox">
         <h4>GM SHOPS</h4>
+
         <StoreList />
+
       </div>
     </div>
   </div>

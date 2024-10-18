@@ -55,4 +55,5 @@ export const GET_USER_STORES = gql`
       }
     }
   }
+
 `;
