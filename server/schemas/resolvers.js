@@ -143,10 +143,43 @@ const resolvers = {
         console.log('Store successfully created:', newStore)
         return newStore;
       } catch (err) {
-        console.error('Error creating store:', err);;
+        console.error('Error creating store:', err);
         throw new Error('Store creation failed')
       }
     },
+
+deleteStore: async (parent, {storeId}, context) => {
+ if (!context.user) {
+  throw AuthenticationError
+ }
+
+ try { 
+ 
+  const deleteStore = await User.findByIdAndUpdate(context.user._id, {
+    $pull: {stores: {_id: storeId}}
+  },
+{new:true});
+
+return deleteStore;
+ } catch (err) { 
+  console.error('Error deleting store:', err);
+  throw new Error ('Store deletion failed')
+ }
+},
+//Help
+// deleteStore: async (_, { storeId }, context) => {
+//   if (!context.user) {
+//     throw new AuthenticationError("You must be logged in");
+//   }
+
+//   return await User.findOneAndUpdate(
+//     { _id: context.user._id },
+//     { $pull: { stores: { _id: storeId } } },
+//     { new: true }
+//   );
+// }
+
+    // TO DO: Select Store action (select an store from sidebar and return the storeId, store products will have to refresh too)
 
     purchaseItems: async (parent, args, context) => {
       if (context.user) {

@@ -86,4 +86,17 @@ mutation CreateItem($item: ItemInput!){
     rarity
   }
 }
-`
+`;
+
+export const DELETE_STORE = gql`
+mutation DeleteStore($storeId: ID!){
+  deleteStore(storeId: $storeId){
+    _id
+    username 
+    stores{
+      _id
+      name
+    }
+  }
+}
+`;

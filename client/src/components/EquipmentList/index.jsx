@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { getAllEquipment, getMagicItems, getEquipmentCategories } from '../../api';
 import { ADD_ITEM_TO_SHOP, CREATE_ITEM } from '../../utils/mutations';

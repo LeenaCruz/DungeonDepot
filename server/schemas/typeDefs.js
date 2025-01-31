@@ -73,6 +73,7 @@ const typeDefs = `
     removeItemFromCart(itemId: ID!): User
     createItem(item: ItemInput!) : Item
     addItemToShop(storeId: ID!, itemId: ID): Store
+    deleteStore(storeId: ID!): User
   }
 `;
 
