@@ -5,14 +5,14 @@ import { GET_USER_STORES } from '../../utils/queries'; // Adjust the path as nec
   import { DELETE_STORE } from '../../utils/mutations';
 
 const StoreList = () => {
-  const { loading, error, data } = useQuery(GET_USER_STORES, {
+  const { loading, error, data, refetch} = useQuery(GET_USER_STORES, {
     context: {
       headers: {
         authorization: `Bearer ${localStorage.getItem('id_token') || ''}`,
       },
     },
   });
-// Aqui al marcar esto me da error 
+
 // const [deleteStore] = useMutation(DELETE_STORE, {
 //   update(cache, { data: {deleteStore}}) {
 //     cache.modify({
@@ -34,8 +34,9 @@ const handleDeleteStore = async (storeId) => {
     const {data} = await deleteStore({
 variables: {storeId}
     });
+    await refetch();
     console.log("Store deleted:", data);
-    // refetch();
+   
   } catch (error) {
     console.log("Error deleting store:", error)
   }
@@ -54,8 +55,7 @@ variables: {storeId}
               ))}
             </ul> */}
             <button onClick={() => handleDeleteStore(store._id)} >Delete</button>
-            {/* <button>Delete</button> */}
-
+           
           </li>
         ))}
       </ul>
